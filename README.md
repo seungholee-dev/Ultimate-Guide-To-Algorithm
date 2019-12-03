@@ -2,7 +2,7 @@
 
 Easy
 1. Climbing Stairs
-- Careful when using the tabulation method.
+- Careful with indexOutOfRange when using the tabulation method. --> Remedy: Don't take array as 0-starting index (rather, 1-starting)
 
 Medium
 1. Longest Palindrome
