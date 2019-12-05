@@ -5,8 +5,10 @@
 ### Heaps
 
 #### Understanding the array-based tree index formula
-left_child_i = parent_i * 2 + 1
+
+left_child_i = parent_i * 2 + 1  
 right_child_i = parent_i * 2 + 2
+```
 
      0    T = 1
     / \
@@ -14,10 +16,12 @@ right_child_i = parent_i * 2 + 2
   / \  / \
  3   4 5  6  T = 3
  
-When T is the tier of the tree, 2^T - 1 is the index(value) of the first node of the next level(T + 1)
+ ```
+ 
+When T is the tier of the tree, 2^T - 1 is the index(value) of the first node of the next level(T + 1)  
 j is the index starting from the beginning of the Tier's index. (In the above tree, 5's j is 2)
 
-(parent_node_index) i = 2^T - 1 + j
+(parent_node_index) i = 2^T - 1 + j  
 (left_child_node_index) i' = 2^(T+1) - 1 + 2j'
 
 
@@ -38,8 +42,8 @@ Array-based tree index formula Explanation: https://cs.stackexchange.com/review/
 **Dynamic Programming**
 
 Easy
-1. Climbing Stairs
-- Careful with indexOutOfRange when using the tabulation method. --> Remedy: Don't take array as 0-starting index (rather, 1-starting)
+1. Climbing Stairs  
+- Careful with indexOutOfRange when using the tabulation method. --> Remedy: Don't take array as 0-starting index (rather, 1-starting)  
 
 Solution
 ```python
@@ -50,6 +54,6 @@ def climbStairs(self, n):
     return a
 ```
 Medium
-1. Longest Palindrome
-- when returning value, think of the type of returning cause it might affect the runtime.
-- function(i, i + 1) but putting function(i, i) is useful when needed.
+1. Longest Palindrome  
+- when returning value, think of the type of returning cause it might affect the runtime.  
+- function(i, i + 1) but putting function(i, i) is useful when needed.  
