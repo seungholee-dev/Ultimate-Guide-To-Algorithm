@@ -12,6 +12,36 @@ Resource
 
 Amortized vs Averaged runtime: https://gist.github.com/jconnolly/5acf05f279a7e9e40371
 
+## Searching Algorithms
+
+#### Linear Search
+
+#### Binary Search
+
+
+## Sorting Algorithms
+
+#### Bubble Sort
+
+#### Selection Sort
+
+#### Insertion Sort
+
+#### Quick Sort
+
+#### Merge Sort
+
+#### Heap Sort
+
+#### Counting Sort
+
+#### Radix Sort
+
+#### BucketSort
+
+#### Tim Sort 
+
+
 ## LinkedList
 >Python does not have linked lists in its standard library. We implement the concept of linked lists using the concept of nodes
 
@@ -195,17 +225,6 @@ Resource
 About LinkedList: https://medium.com/@kojinoshiba/data-structures-in-python-series-1-linked-lists-d9f848537b4d
 
 Singly LinkedList vs Doubly LinkedList: https://stackoverflow.com/questions/10708790/microsoft-asks-singly-list-or-doubly-list-what-are-the-pros-and-cons-of-using
-## Sorting
-
-#### BubbleSort
-
-#### Insertion Sort
-
-#### Quick Sort
-
-#### Merge Sort
-
-#### BucketSort
 
 
 ## Trees
@@ -383,7 +402,15 @@ About Priority Queue: https://www.geeksforgeeks.org/priority-queue-set-1-introdu
 
 Priorty Queue and Binary Heap: https://runestone.academy/runestone/books/published/pythonds/Trees/PriorityQueueswithBinaryHeaps.html
 
+
+## Graphs
+
+### BFS
+### DFS
+
 ---
+
+
 
 # Coding Interview questions
 **Dynamic Programming**
@@ -407,6 +434,7 @@ Medium
 
 
 **Heap**
+
 Medium
 1. Top K Frequent Elements
 - Knowing time complexity of heap operations are important!
@@ -457,7 +485,57 @@ Check the below link for time complexity and space complexity for this solution.
 
 Resources
 Solution for Top K Frequent elements --> https://leetcode.com/problems/top-k-frequent-elements/discuss/325463/2-Clean-Python-Solution-(Bucket-Sort-Heap-Explained)
-## Useful coding tips for Python
+
+
+**Bit Manipulation**
+
+Easy
+
+1. Single Number
+
+
+Solution1 (Hash Table)
+Code
+```python
+def singleNumber(self, nums: List[int]) -> int:
+        d = {}
+        for n in nums:
+            if n in d:
+                d[n] += 1
+            else:
+                d[n] = 1
+            
+        for i in d:
+            if d[i] == 1:
+                return i
+```
+
+Time Complexity: O(N)
+Space Complexity: O(N)
+Solution2 (Bit manipulation)
+
+
+Code
+```python
+class Solution(object):
+    def singleNumber(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        a = 0
+        for i in nums:
+            a ^= i
+        return a
+```
+
+Key takeaways
+* Associative property and Communtative property works for Xor(Exclusive or) Operations.
+
+Time Complexity: O(N)  
+Space Complexity: O(1)
+
+# Useful coding tips for Python
 
 ### Using `collections.Counter()`
 
