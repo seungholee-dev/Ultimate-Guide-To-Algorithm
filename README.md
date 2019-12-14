@@ -18,9 +18,66 @@ Amortized vs Averaged runtime: https://gist.github.com/jconnolly/5acf05f279a7e9e
 
 #### Binary Search
 
+##### Iterative
+```python
+def binary_search(arr, x):
+    l, r = 0, len(arr)-1
+    while l <= r:
+        mid = (l + r) // 2
+        if arr[mid] < x:
+            l = mid + 1
+        elif x < arr[mid]:
+            r = mid - 1
+        else:
+            return mid
+    return -1
+```
 
-## Sorting Algorithms
+* Time Complexity: O(log(n))
 
+* Space Complexity: O(1)
+
+##### Recursive
+```python
+# Returns index of x in arr if present, else -1 
+def binarySearch (arr, l, r, x): 
+    
+    # Check base case
+    if l > r:
+        return -1
+
+    mid = (l + r) // 2
+
+    # If element is present at the middle itself 
+    if arr[mid] == x: 
+        return mid 
+      
+    # If element is smaller than mid, then it can only 
+    # be present in left subarray 
+    elif arr[mid] > x: 
+        return binarySearch(arr, l, mid-1, x) 
+
+    # Else the element can only be present in right subarray 
+    else: 
+        return binarySearch(arr, mid+1, r, x) 
+
+```
+* Note that we are SEARCHING not SORTING so we don't check every element.
+--> That's why it takes O(logn)
+
+* when calling this function, `l` should be `0` and `r` should be `len(arr) - 1`
+like `binarySearch(arr, 0, len(arr) - 1, 15)`
+
+* Time Complexity: O(log(n)) 
+
+* Space Complexity: O(log(n)) --> Because of `call stack`
+
+
+##### Resource
+ 
+https://www.sanfoundry.com/python-program-implement-binary-search-recursion/
+
+https://blog.finxter.com/iterative-vs-recursive-binary-search-algorithms-in-python/
 #### Bubble Sort
 
 #### Selection Sort
@@ -534,6 +591,31 @@ Key takeaways
 
 Time Complexity: O(N)  
 Space Complexity: O(1)
+
+## Tips and advanced topics
+
+### Compute average of two numbers without overflow
+
+Given two numbers, a and b. Compute the average of the two numbers.
+
+The well know formula (a + b) / 2 may fail at the following case :
+If, a = b = (2^31) – 1; i.e. INT_MAX.
+Now, (a+b) will cause overflow and hence formula (a + b) / 2 wont work
+
+
+
+* Java 
+```java
+(a / 2) + (b / 2) + ((a % 2 + b % 2) / 2); 
+```
+
+* Python
+```python
+(a // 2) + (b // 2) + ((a % 2 + b % 2) // 2) 
+```
+
+Resource:
+https://www.geeksforgeeks.org/compute-average-two-numbers-without-overflow/
 
 # Useful coding tips for Python
 
