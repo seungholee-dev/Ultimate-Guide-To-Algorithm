@@ -80,9 +80,95 @@ https://www.sanfoundry.com/python-program-implement-binary-search-recursion/
 https://blog.finxter.com/iterative-vs-recursive-binary-search-algorithms-in-python/
 #### Bubble Sort
 
+```python
+def bubbleSort(arr): 
+    n = len(arr) 
+  
+    # Traverse through all array elements 
+    for i in range(n): 
+  
+        # Last i elements are already in place 
+        for j in range(0, n-i-1): 
+  
+            # traverse the array from 0 to n-i-1 
+            # Swap if the element found is greater 
+            # than the next element 
+            if arr[j] > arr[j+1] : 
+                arr[j], arr[j+1] = arr[j+1], arr[j] 
+  
+# Driver code to test above 
+arr = [64, 34, 25, 12, 22, 11, 90] 
+  
+bubbleSort(arr) 
+```
+* Careful with the range of `j` cause we need to use `j + 1` as well. 
+
+* Time Complexity: O(n^2)
+* Space Compexity: O(1)
+* Sorting in place: Yes
+
 #### Selection Sort
+The Selection sort algorithm is based on the idea of finding the minimum or maximum element in an unsorted array and then putting it in its correct position in a sorted array.
+
+* Swapping is involved unlike insertion sorting
+
+* Here we are not looking for the perfect position for the element we pick(insertion sorting), we are looking for minimum, maximum value candidate to be changed. 
+
+```python
+# Traverse through all array elements 
+for i in range(len(A)): 
+      
+    # Find the minimum element in remaining  
+    # unsorted array 
+    min_idx = i 
+    for j in range(i+1, len(A)): 
+        if A[min_idx] > A[j]: 
+            min_idx = j 
+              
+    # Swap the found minimum element with  
+    # the first element         
+    A[i], A[min_idx] = A[min_idx], A[i] 
+```
+* Time Complexity: O(n^2)
+* Space Complexity: O(1)
+* In place: Yes
+
+
 
 #### Insertion Sort
+
+* Inserting to the right place from the front of the array.
+
+```python
+# Traverse through 1 to len(arr)
+def insertion_sort(arr): 
+    for i in range(1, len(arr)): 
+  
+        key = arr[i] 
+  
+        # Move elements of arr[0..i-1], that are 
+        # greater than key, to one position ahead 
+        # of their current position 
+        for j in range(i - 1, -1, -1): # j: i-1 ~~ 0
+            if arr[j] <= key:  # Finally found the first arr[j] that should be located on the left side of the key
+                break
+            arr[j + 1] = arr[j]
+        arr[j + 1] = key
+```
+
+* When Adding the key to the right place
+
+| index 	|       j       	|     j'(= j + 1)    	| j' + 1 	|
+|:-----:	|:-------------:	|:------------------:	|:------:	|
+| Value 	|       A       	|          B         	|    B   	|
+|       	|       ^       	| Put the `key` here 	|        	|
+|       	| current point 	|                    	|        	| 
+
+* Time Complexity: O(n^2)
+* Space Complexity: O(1)
+* Sorting in place: Yes
+
+
 
 #### Quick Sort
 
@@ -95,6 +181,7 @@ https://blog.finxter.com/iterative-vs-recursive-binary-search-algorithms-in-pyth
 #### Radix Sort
 
 #### BucketSort
+The process of bucket sort can be understood as scatter-gather approach. The elements are first scattered into buckets then the elements of buckets are sorted. Finally, the elements are gathered in order.
 
 #### Tim Sort 
 
@@ -469,7 +556,7 @@ Priorty Queue and Binary Heap: https://runestone.academy/runestone/books/publish
 
 
 
-# Coding Interview questions
+# Coding Problems Practice
 **Dynamic Programming**
 
 Easy
@@ -543,6 +630,114 @@ Check the below link for time complexity and space complexity for this solution.
 Resources
 Solution for Top K Frequent elements --> https://leetcode.com/problems/top-k-frequent-elements/discuss/325463/2-Clean-Python-Solution-(Bucket-Sort-Heap-Explained)
 
+**Two Pointer**
+
+Medium
+
+1. Container with most water.
+* The widest container (using first and last line) is a good candidate, because of its width. Its water level is the height of the smaller one of first and last line.
+
+* All other containers are less wide and thus would need a higher water level in order to hold more water.
+
+* The smaller one of first and last line doesn't support a higher water level and can thus be safely removed from further consideration.
+
+Code
+```python
+class Solution:
+    def maxArea(self, height):
+        i, j = 0, len(height) - 1
+        water = 0
+        while i < j:
+            water = max(water, (j - i) * min(height[i], height[j]))
+            if height[i] < height[j]:
+                i += 1
+            else:
+                j -= 1
+        return water
+```
+
+2. Longest substring without repeating characters
+
+Solution
+
+* Use 'Sliding Window' --> keep tracking the `start` and the `end` index of the window.
+
+
+
+```Java
+public int lengthOfLongestSubstring(String s) {
+    int i = 0, j = 0, max_len = 0;
+    Set<Character> set = new HashSet<>();
+    
+    while (j < s.length()) {
+        if (!set.contains(s.charAt(j))) {
+            set.add(s.charAt(j++));
+            max_len = Math.max(max_len, set.size());
+        } else {
+            set.remove(s.charAt(i++));
+        }
+    }
+    
+    return max;
+}
+```
+
+```python
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        sliding_set = set()
+        l, r = 0, 0
+        max_len = 0
+        
+        while r < len(s):
+            if s[r] in sliding_set:
+                sliding_set.remove(s[l])
+                l += 1
+            else:
+                sliding_set.add(s[r])
+                r += 1
+                max_len = max(max_len, r - l) # --> we already did r += 1 so no need to do r - l + 1
+        return max_len
+```
+
+* --> Using HashSet
+* Only have to update max_len when adding non duplicate ones cause otherwise max_len won't get bigger anywyas.
+* Also, when getting the length, note that `len(set)` is not used but `r - l`
+
+```Java
+ public int lengthOfLongestSubstring(String s) {
+        if (s.length()==0) return 0;
+        HashMap<Character, Integer> map = new HashMap<Character, Integer>();
+        int max=0;
+        for (int i=0, j=0; i<s.length(); ++i){
+            if (map.containsKey(s.charAt(i))){
+                j = Math.max(j,map.get(s.charAt(i))+1);
+            }
+            map.put(s.charAt(i),i);
+            max = Math.max(max,i-j+1);
+        }
+        return max;
+    }
+```
+
+--> Using HashMap
+```python
+def lengthOfLongestSubstring(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        d, res, start = {}, 0, 0
+        for i, ch in enumerate(s):
+            if ch in d:  # This also get triggered when there's duplicate one out of the window range (before the start index) so in the below code we gotta use max to make that happen
+                start = max(start, d[ch]+1) # Since we are not creating new dictionary everytime when duplicate one is found, 
+                                            # We have to make sure we stay inside the window range (There might be no duplicate one in the window but if we don't use max for this, then it might get the old one in front of the starting point and think it's a duplicate one)
+            res = max(res, i-start+1)            
+            d[ch] = i
+        return res
+```
+--> using dictionary.
+
 
 **Bit Manipulation**
 
@@ -592,6 +787,9 @@ Key takeaways
 Time Complexity: O(N)  
 Space Complexity: O(1)
 
+
+
+
 ## Tips and advanced topics
 
 ### Compute average of two numbers without overflow
@@ -611,7 +809,8 @@ Now, (a+b) will cause overflow and hence formula (a + b) / 2 wont work
 
 * Python
 ```python
-(a // 2) + (b // 2) + ((a % 2 + b % 2) // 2) 
+(a // 2) + (b // 2) + ((a % 2 + b % 2) / 2) #  --> If the average needs to be specific with decimal points
+(a // 2) + (b // 2) + ((a % 2 + b % 2) // 2) # --> If the average needs to be rounded down (no decimal points)
 ```
 
 Resource:
