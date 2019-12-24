@@ -181,7 +181,38 @@ def insertion_sort(arr):
 #### Radix Sort
 
 #### BucketSort
+
+> Sort a large set of floating point numbers which are in range from 0.0 to 1.0 and are uniformly distributed across the range. How do we sort the numbers efficiently?
+
+
 The process of bucket sort can be understood as scatter-gather approach. The elements are first scattered into buckets then the elements of buckets are sorted. Finally, the elements are gathered in order.
+It is commonly used when elements are uniformly distributed.
+
+You uniformly distribute all the elements and the best case is having every bucket for each element. in that case, we won't have to really sort the bucket.
+and we The last step of bucket sort, which is concatenating all the sorted objects in each buckets, requires {\displaystyle O(k)} O(k) time
+
+
+> When the range is not limited for the input values, this sorting algorithm shouldn't be used.
+> 
+> 
+> When thinking of making buckets for this case  we never know
+>the range of the integers that will be input. And even if we try to think all the cases, we can't make every buckets beforehand until infinite. 
+
+Conventionally, insertion sort would be used for sorting buckets, but other algorithm could be used as well
+
+Bucket sort performs at its worst, O(n^2), when all elements at allocated to the same bucket
+
+* Time Complexity: Best--> O(n + k) / Worst --> O(n^2) 
+* Space Complexity: 
+* Bucket sort is not a comparison sorting algorithm!
+
+References
+
+https://en.wikipedia.org/wiki/Bucket_sort#Average-case_analysis
+
+https://stackoverflow.com/questions/54808131/how-is-the-time-complexity-of-bucket-sort-onk-if-it-uses-insertion-sort-to-so
+
+https://stackoverflow.com/questions/31633391/when-should-i-choose-bucket-sort-over-other-sorting-algorithms
 
 #### Tim Sort 
 
@@ -552,11 +583,71 @@ Priorty Queue and Binary Heap: https://runestone.academy/runestone/books/publish
 ### BFS
 ### DFS
 
+
+## Dynamic Programming (DP)
+
+Most of the DP problems can be solved by trying out these methods! (More optimize# BFS
+def invertTree2(self, root):
+    queue = collections.deque([(root)])
+    while queue:
+        node = queue.popleft()
+        if node:
+            node.left, node.right = node.right, node.left
+            queue.append(node.left)
+            queue.append(node.right)
+    return root
+    d as the number grows in the below)
+1. Find recursive relation
+2. Recursive (top-down)
+3. Recursive + memo (top-down)
+4. Iterative + memo (bottom-up)
+5. Iterative + N variables (bottom-up)
+
+For this, please check this link for a good example of solving DP!   
+--> https://leetcode.com/problems/house-robber/discuss/156523/From-good-to-great.-How-to-approach-most-of-DP-problems.
+
 ---
 
 
 
 # Coding Problems Practice
+**Tree**
+
+Easy  
+1. Invert Binary Tree
+```python
+# DFS Solution
+class Solution:
+    def invertTree(self, root):
+        if root is None:
+            return None
+        root.left, root.right = \
+            self.invertTree(root.right), self.invertTree(root.left)
+        return root
+
+# BFS Solution
+def invertTree2(self, root):
+    queue = collections.deque([(root)])
+    while queue:
+        node = queue.popleft()
+        if node:
+            node.left, node.right = node.right, node.left
+            queue.append(node.left)
+            queue.append(node.right)
+    return root
+    
+```
+
+>Deque can be implemented in python using the module “collections“. Deque is preferred over list in the cases where we need quicker append and pop operations from both the ends of container, as deque provides an O(1) time complexity for append and pop operations as compared to list which provides O(n) time complexity.
+> * Under the hood, a deque is a doubly-linked list.
+> * Use deque only if you need insert/remove to be fast from both ends, and don't care about read speeds. List has constant time append/pop from one end and also constant time access anywhere in the list. You should almost always prefer list over deque, which is why list is builtin.
+
+>For reading random data in the list, it can be accessed constant time. However, Linked Lists like queues and double linked lists like deques don't have that ability. So we gotta choose wisely which one to use.
+
+Resource  
+
+https://www.geeksforgeeks.org/deque-in-python/
+
 **Dynamic Programming**
 
 Easy
@@ -571,6 +662,16 @@ def climbStairs(self, n):
         a, b = b, a + b
     return a
 ```
+
+2. House Robber
+
+Key take aways
+
+* When using bottom up approach, no need to make the whole table --> Can be reduced by using only a few variables and reusing them!
+
+
+MUST READ --> https://leetcode.com/problems/house-robber/discuss/156523/From-good-to-great.-How-to-approach-most-of-DP-problems.
+
 Medium
 1. Longest Palindrome  
 - when returning value, think of the type of returning cause it might affect the runtime.  
