@@ -171,6 +171,87 @@ def insertion_sort(arr):
 
 
 #### Quick Sort
+When thinking of Quick Sorting, think of the sorting version of Binary Search. Instead of searching the middle elements of the array like when doing Binary Search,
+We are placing the pivot value in the right place (Depends on how you choose the pivot tho). and You keep doing it until every element is sorted.
+Also, note that left and right side of the pivot doesn't have to be sorted in order. As long as the left side of the pivot is smaller than the pivot and the right side of the pivot is bigger
+than the pivot, it's all good.
+
+
+Usually, you make `quicksort()` funciton and another function called `partition()`
+
+Here's a Python implementation (Using last element as a pivot)
+```python
+def partition(xs, start, end):
+    follower = leader = start
+    while leader < end:
+        if xs[leader] <= xs[end]:
+            xs[follower], xs[leader] = xs[leader], xs[follower]
+            follower += 1
+        leader += 1
+    xs[follower], xs[end] = xs[end], xs[follower]
+    return follower
+
+def _quicksort(xs, start, end):
+    if start >= end:
+        return
+    p = partition(xs, start, end)
+    _quicksort(xs, start, p-1)
+    _quicksort(xs, p+1, end)
+    
+def quicksort(xs):
+    _quicksort(xs, 0, len(xs)-1)
+```
+
+
+Here's another implementation (Using last element as a pivot)
+```python
+
+# Python program for Quicksort
+# This function takes last element as pivot, places 
+# the pivot element at its correct position in sorted 
+# array, and places all smaller (smaller than pivot) 
+# to left of pivot and all greater elements to right 
+# of pivot 
+def partition(arr, low, high): 
+	i = low - 1		 # index of smaller element 
+	pivot = arr[high]	 # pivot 
+
+	for j in range(low, high): 
+		# If current element is smaller than or 
+		# equal to pivot 
+		if arr[j] <= pivot: 
+			# increment index of smaller element 
+			i += 1
+			arr[i], arr[j] = arr[j], arr[i] 
+	arr[i + 1], arr[high] = arr[high], arr[i + 1] 
+	return i + 1
+
+# The main function that implements QuickSort 
+# arr[] --> Array to be sorted, 
+# low --> Starting index, 
+# high --> Ending index 
+
+# Function to do Quick sort 
+def quickSort(arr, low, high): 
+	if low < high: 
+
+		# pi is partitioning index, arr[p] is now 
+		# at right place 
+		pi = partition(arr, low, high) 
+
+		# Separately sort elements before 
+		# partition and after partition 
+		quickSort(arr, low, pi - 1) 
+		quickSort(arr, pi + 1, high) 
+
+# Driver code to test above 
+arr = [10, 7, 8, 9, 1, 5] 
+n = len(arr) 
+quickSort(arr, 0, n - 1) 
+print ("Sorted array is:") 
+for i in range(n): 
+	print ("%d" %arr[i]), 
+```
 
 #### Merge Sort
 
