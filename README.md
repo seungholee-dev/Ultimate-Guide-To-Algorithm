@@ -494,10 +494,52 @@ About LinkedList: https://medium.com/@kojinoshiba/data-structures-in-python-seri
 
 Singly LinkedList vs Doubly LinkedList: https://stackoverflow.com/questions/10708790/microsoft-asks-singly-list-or-doubly-list-what-are-the-pros-and-cons-of-using
 
+---
+
+## Stack
+
+* A stack is a data structure that stores items in an Last-In/First-Out manner. This is frequently referred to as LIFO.
+
+* For `stack`, we have 
+>* *`push()`: put new element into stack
+>* *`pop()`: pop the top element
+>* `peek()`: see what's on the top(but not removing)
+>* `empty()`: boolean, `true` if empty
+
+#### Implementation
+
+For Python, we have 3 ways of implementing `Stack`.
+
+1.Using `list` Built-in
+
+* Using `append()` for `push()` and `pop()` for `pop()`.
+
+* `push()` and `pop()` takes Amortized *O(1)* time complexity in list.
+
+* When searching element from the stack, it has a benefit of taking *O(1)* time complexity.
+
+2.Using `collections.deque`
+
+* Using `append()` for `push()` and `pop()` for `pop()`.
+
+* The deque class implements a double-ended queue which supports addition and removal of elements from either end in *O(1)* time (non-amortized).
+
+* Because deques support adding and removing elements from both ends equally well, they can serve both as `queue`s and as `stack`s.
+
+* Python’s `deque` objects are implemented as `doubly-linked lists` which gives them proper and consistent performance insertion and deletion of elements, but poor *O(n)* performance as they randomly access elements in the middle of the stack.
+
+3.Using `queue.LifoQueue`
+
+#### Resource
+
+https://realpython.com/how-to-implement-python-stack/
+
+https://www.edureka.co/blog/stack-in-python/
+
+---
 
 ## Trees
 
----
 
 ### Overall Concepts
 
@@ -932,6 +974,46 @@ def lengthOfLongestSubstring(self, s):
 ```
 --> using dictionary.
 
+
+
+**Stack**
+
+Hard
+
+1. Largest Rectangle in Histogram
+
+Take aways) When doing brute forcing, thinking of picking every combinations (like thinking of pairs of them) helps!
+
+
+Using stack 
+```python
+def largestRectangleArea(self, height):
+    height.append(0)
+    stack = [-1]
+    ans = 0
+    for i in xrange(len(height)):
+        while height[i] < height[stack[-1]]:
+            h = height[stack.pop()]
+            w = i - stack[-1] - 1
+            ans = max(ans, h * w)
+        stack.append(i)
+    height.pop()
+    return ans
+```
+
+- `height.pop()` that last line is to recover the original state of the input, since python list is passed by reference instead of shadow copy. It is not gonna give you wrong result for this problem. However in real world development, think about your colleague created a list contains some values that he will need in the future, you added a sentinel value to make your life easier, if you don't clean it up afterward, your colleague's code is very likely to crash. This is a good programming habit, it added one more "redundant" line, but it also make everybody's life easier.
+
+- `height.append(0)` and `stack = [-1]` was added to deal with the last element left in the stack. The last one in the stack should be the minimum height index. So, to make 
+it h * len(height), we added these two.
+
+* Time Complexity: O(n) --> Operated only one `push` and `pop` for each n elements. 
+
+* Space Complexity: O(n) --> We only used a `Stack`
+
+* Resource: https://leetcode.com/problems/largest-rectangle-in-histogram/discuss/28917/AC-Python-clean-solution-using-stack-76ms
+
+* Here's another great solution without using stack(Haven't understood yet): https://leetcode.com/problems/largest-rectangle-in-histogram/discuss/28902/5ms-O(n)-Java-solution-explained-(beats-96)
+2. Maximal Rectangle
 
 **Bit Manipulation**
 
