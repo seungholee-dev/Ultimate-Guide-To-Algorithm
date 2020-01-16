@@ -582,6 +582,25 @@ https://www.edureka.co/blog/stack-in-python/
 ### AVL Tree
 
 
+### Maipulating Trees
+
+#### Copying a tree
+
+Recursive
+
+```java
+public TreeNode cloneTree(TreeNode root) {
+        if (root == null) return null;
+        TreeNode newNode = new TreeNode(root.val);
+        newNode.left = cloneTree(root.left);
+        newNode.right = cloneTree(root.right);
+        return newNode;
+}
+```
+
+Iterative
+
+
 
 ---
 
@@ -722,16 +741,8 @@ Priorty Queue and Binary Heap: https://runestone.academy/runestone/books/publish
 ## Dynamic Programming (DP)
 
 Most of the DP problems can be solved by trying out these methods! (More optimize# BFS
-def invertTree2(self, root):
-    queue = collections.deque([(root)])
-    while queue:
-        node = queue.popleft()
-        if node:
-            node.left, node.right = node.right, node.left
-            queue.append(node.left)
-            queue.append(node.right)
-    return root
-    d as the number grows in the below)
+
+    
 1. Find recursive relation
 2. Recursive (top-down)
 3. Recursive + memo (top-down)
@@ -756,8 +767,7 @@ class Solution:
     def invertTree(self, root):
         if root is None:
             return None
-        root.left, root.right = \
-            self.invertTree(root.right), self.invertTree(root.left)
+        root.left, root.right = self.invertTree(root.right), self.invertTree(root.left)
         return root
 
 # BFS Solution
@@ -782,6 +792,65 @@ def invertTree2(self, root):
 Resource  
 
 https://www.geeksforgeeks.org/deque-in-python/
+
+
+2. Merge Two Binary Trees
+
+Solution
+```python
+def mergeTrees(self, t1, t2):
+        if t1 and t2:
+            root = TreeNode(t1.val + t2.val)
+            root.left = self.mergeTrees(t1.left, t2.left)
+            root.right = self.mergeTrees(t1.right, t2.right)
+            return root
+        else:
+            return t1 or t2
+
+```
+
+
+Solution2
+```java
+public class Solution {
+    public TreeNode mergeTrees(TreeNode t1, TreeNode t2) {
+        if (t1 == null)
+            return t2;
+        if (t2 == null)
+            return t1;
+        t1.val += t2.val;
+        t1.left = mergeTrees(t1.left, t2.left);
+        t1.right = mergeTrees(t1.right, t2.right);
+        return t1;
+    }
+}
+```
+
+**Iterative Solution(Important)**
+```python
+def mergeTrees(self, t1: TreeNode, t2: TreeNode) -> TreeNode:
+        if not t1 or not t2: return t1 or t2
+        s = [(t1, t2)]
+        while s: 
+            n1, n2 = s.pop()
+            #nothing to add on
+            if not n2: continue
+            n1.val += n2.val
+            if not n1.right: n1.right = n2.right
+            else: s.append((n1.right, n2.right))
+            if not n1.left: n1.left = n2.left
+            else: s.append((n1.left, n2.left))
+        return t1
+```
+* The above solution is mocking how the recursive algorithm works (Using call stack).
+
+
+When `m` is the minimum number of nodes from the two given trees 
+
+Time Complexity: *O(m)* ---> Cause even if you have to add the rest of the nodes that the minimum number tree doesn't have, you only have to add only one root node of the remaining part.
+So it's not *O(M)* (`M` for maximum)
+
+Space Complexity: *O(m)* --> Cause the tree that has the minimum number of nodes can be skewed and in that case, it means you will have to repeat m times.
 
 **Dynamic Programming**
 
@@ -1093,6 +1162,18 @@ Resource:
 https://www.geeksforgeeks.org/compute-average-two-numbers-without-overflow/
 
 # Useful coding tips for Python
+
+### Using `and` and `or` for returning value
+
+* In python, `and` operation will not return a boolean value, it depends on the 'values'. Some values like '0', '', '{}', '[]' and so on, will be judged by false. And other values will be judged by true. The whole sentence will be judged like a boolean value. If it's true, it will return the last true value, remember is the value, not True. Otherwise, it will return the first false value.
+
+> e.g. 3 and [] and 34 --> will return [] (the first false element)
+>
+>e.g. 3 and 5 and 1 --> will return 1 (the last true element)
+
+* `or` will return the most first, true value(if there s any)
+> e.g. 0 or 3 or [] --> 3
+> e.g. [] or [] --> []
 
 ### Using `collections.Counter()`
 
