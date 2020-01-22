@@ -486,6 +486,25 @@ Cons
 * More memory for storage (.prev pointer)
 * Relatively complex implementation than Singly LinkedList(coding)
 
+#### Operations
+
+##### Creation
+
+#### Example of Using Doubly LinkedList
+1. LRU Cache
+
+* LRU Cache uses `HashMap` and `Doubly LinkedList` to make Adding and deleting *O(1)* operation.
+--> Because of *O(1)* Time Complexity, we need to use use both of those data structure!
+
+* Also there's a
+
+Link
+
+https://www.interviewcake.com/concept/java/lru-cache  
+
+https://leetcode.com/problems/lru-cache
+
+
 ### When to use Singly LinkedList and Doubly LinkedList?
 
 
