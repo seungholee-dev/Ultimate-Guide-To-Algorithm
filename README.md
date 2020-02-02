@@ -954,6 +954,22 @@ Check the below link for time complexity and space complexity for this solution.
 Resources
 Solution for Top K Frequent elements --> https://leetcode.com/problems/top-k-frequent-elements/discuss/325463/2-Clean-Python-Solution-(Bucket-Sort-Heap-Explained)
 
+2. Coin Change 1
+* Key takeaway: I tried out this problem with Greedy Algorithm and failed with some cases. You should be careful when solving it.
+
+  * e.g. coins = [6, 4], amount = 20 ==> When using Greedy Algorithm answer is -1 (6 * 3 + 2(can't get 2)) However, the actual answer is actually 4 (6 * 2 + 4 * 2)
+
+  * For more info, please search `Greedy` in the discussion tab on Leetcode.
+    
+  * This problem can have many variations like into StairCase Problem
+  
+Solution
+
+1. Top-Down approach
+
+
+2. Bottom-up approach 
+  
 **Two Pointer**
 
 Medium
