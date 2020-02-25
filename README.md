@@ -562,6 +562,16 @@ https://www.edureka.co/blog/stack-in-python/
 
 ### Overall Concepts
 
+#### Kinds of Trees
+* Full Binary Tree: A full binary tree (sometimes proper binary tree or 2-tree) is a tree in which every node other than the leaves has two children.
+
+![](images/fullBinaryTree.jpg)
+
+* Complete Binary Tree: 
+A complete binary tree is a binary tree in which every level, except possibly the last, is completely filled, and all nodes are as far left as possible.
+
+![](images/completeBinaryTree.jpg)
+
 #### Understanding the array-based tree index formula
 
 > 1. left_child_i = parent_i * 2 + 1  
@@ -970,6 +980,12 @@ Solution
 
 2. Bottom-up approach 
   
+  
+Resource
+
+Explanation video: 
+https://leetcode.com/problems/coin-change/discuss/218340/Top-Down-Recursive-and-Bottom-Up-Iterative-Approach-Explanation
+
 **Two Pointer**
 
 Medium
