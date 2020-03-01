@@ -2,6 +2,10 @@
 
 ## All you need to know before you start
 
+### Before you start
+For Data Structure Visualizations, this website might help(The method how it solves might be different from this page): 
+
+https://www.cs.usfca.edu/~galles/visualization/Algorithms.html
 
 #### Amortized vs Averaged Runtime?
 
@@ -555,6 +559,36 @@ https://realpython.com/how-to-implement-python-stack/
 
 https://www.edureka.co/blog/stack-in-python/
 
+https://www.geeksforgeeks.org/stack-in-python/
+
+
+
+
+## Queue
+
+>* enqueue(): Adds an item to the queue
+>* dequeue(): Removes an item from the queue
+>* front(): Get the front item
+>* end(): Get the last item
+
+### Implementation
+
+There are also 3 ways to implement `Queue` on Python.
+
+1. Using `list`
+
+* Instead of enqueue() and dequeue(), append() and pop() function is used.
+
+* However, lists are quite slow for this purpose because inserting or deleting an element at the beginning requires shifting all of the other elements by one, requiring O(n) time.
+
+
+
+2. Using `collections,deque`
+
+* Deque is preferred over list in the cases where we need quicker append and pop operations from both the ends of container, as deque provides an O(1) time complexity for append and pop operations as compared to list which provides O(n) time complexity. Instead of `enqueue` and `deque`, `append()` and `popleft()` functions are used.
+
+3. Using `queue.Queue`
+
 ---
 
 ## Trees
@@ -763,9 +797,160 @@ Priorty Queue and Binary Heap: https://runestone.academy/runestone/books/publish
 
 ## Graphs
 
+When relating graphs, BFS is usually good for finding shortest path (fastest path). 
+
 ### BFS
 ### DFS
 
+
+#### Directed Graph
+
+One thing we have to think carefully is that unlike `tree` data structure, Graphs can be visited more than once. So we have to be aware of that.
+
++ We want to make sure that we visit all the vertices!
+
+
+Below code works for when every node is quite strongly connected and assuming there will be no left out ones.
+```python
+# V: A list of vertices/ adj: adjacency list / s: vertex we are visiting
+parent = {s: None}
+def dfs_visit(V, adj, s): 
+    for v in adj[s]:
+        if v not in parent:
+            parent[v] = s
+            dfs_visit(V, adj, v) 
+```
+
+
+But what if some graphs are not strongly connected and there are more than one cluster? For those cases we can use the above function recursively like below!
+And this methodology should be used usually for Graph DFS!
+```python
+def dfs(V, adj):
+    parent = {}
+    for s in V:
+        if s not in parent: # This means we didn't visit s
+            parent[s] = None 
+            dfs_visit(v, adj, s) # So let's visit s!
+```
+
+Time Complexity: O(V + E) --> Linear Time
+
+* The above code will make directed graph get visited once and undirected graph get visited twice(one from each side)
+
+### Edge Classification
+* Tree edge: the edge that leads us to new edge (it forms a tree in the end that's why it's called that way)
+
+* Forward edge: takes node to descendant in the tree
+
+* Backward edge: takes node to ancestor in the tree
+
+* Cross edge: takes sibling node to sibling node in the tree 
+
+To detect Forward edge, Cross edge --> use counter for it just like the level!
+
+To detect backward edge: use stack to see if the current node
+
+
+You can't have forward edges and cross edges in undirected graphs (Still can have tree edges and Backward edges)
+
+
+### Cycle detection
+
+* Graph has a cycle <==> Graph has a backward edge
+
+### Topological Sort
+> One good example of using Topological Sort is 'Job Scheduling'
+
+Givven directed acyclic graph (DAG), order vertices so that all edges point from lower order to higher order.
+
+* Topological Sorting result can be more than one since the requirement of it is to only have forward edges left to right in the printed result.
+
+
+#### Using DFS with Stack
+```python
+#Python program to print topological sorting of a DAG 
+from collections import defaultdict 
+
+#Class to represent a graph 
+class Graph: 
+	def __init__(self,vertices): 
+		self.graph = defaultdict(list) #dictionary containing adjacency List 
+		self.V = vertices #No. of vertices 
+
+	# function to add an edge to graph 
+	def addEdge(self,u,v): 
+		self.graph[u].append(v) 
+
+	# A recursive function used by topologicalSort 
+	def topologicalSortUtil(self,v,visited,stack): 
+
+		# Mark the current node as visited. 
+		visited[v] = True
+
+		# Recur for all the vertices adjacent to this vertex 
+		for i in self.graph[v]: 
+			if visited[i] == False: 
+				self.topologicalSortUtil(i,visited,stack) 
+
+		# Push current vertex to stack which stores result 
+		stack.insert(0,v) 
+
+	# The function to do Topological Sort. It uses recursive 
+	# topologicalSortUtil() 
+	def topologicalSort(self): 
+		# Mark all the vertices as not visited 
+		visited = [False]*self.V 
+		stack =[] 
+
+		# Call the recursive helper function to store Topological 
+		# Sort starting from all vertices one by one 
+		for i in range(self.V): 
+			if visited[i] == False: 
+				self.topologicalSortUtil(i,visited,stack) 
+
+		# Print contents of the stack 
+		print stack 
+
+g= Graph(6) 
+g.addEdge(5, 2); 
+g.addEdge(5, 0); 
+g.addEdge(4, 0); 
+g.addEdge(4, 1); 
+g.addEdge(2, 3); 
+g.addEdge(3, 1); 
+
+print "Following is a Topological Sort of the given graph"
+g.topologicalSort() 
+#This code is from geeksforgeeks
+
+# Following is a Topological Sort of the given graph
+# 5 4 2 3 1 0
+
+```
+* Time Complexity : O(V + E)
+
+
+#### Kahn's Algorithm (BFS method)
+
+* Time Complexity : O (V + E)
+
+
+Resource
+
+MIT Course-DFS, Topological sort, Edge classification, Cycle detection
+https://www.youtube.com/watch?v=AfSk24UTFS8
+
+DFS and Topological sorting medium  
+https://medium.com/@yasufumy/algorithm-depth-first-search-76928c065692
+
+Topoloical sort
+https://www.geeksforgeeks.org/topological-sorting/
+
+
+Kahn's Algorithm
+https://www.educative.io/edpresso/what-is-topological-sort
+
+https://www.geeksforgeeks.org/topological-sorting-indegree-based-solution/
 
 ## Dynamic Programming (DP)
 
@@ -1246,3 +1431,6 @@ Counter({2: 4, 3: 4, 1: 3, 4: 2, 5: 1})
 ```
 
 ### Using `heapq`
+
+
+### Using `collections.defaultdict`
