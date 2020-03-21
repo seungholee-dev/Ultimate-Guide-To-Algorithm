@@ -838,6 +838,9 @@ Time Complexity: O(V + E) --> Linear Time
 * The above code will make directed graph get visited once and undirected graph get visited twice(one from each side)
 
 ### Edge Classification
+
+![](images/edge_classification.png)
+
 * Tree edge: the edge that leads us to new edge (it forms a tree in the end that's why it's called that way)
 
 * Forward edge: takes node to descendant in the tree
@@ -854,9 +857,11 @@ To detect backward edge: use stack to see if the current node
 You can't have forward edges and cross edges in undirected graphs (Still can have tree edges and Backward edges)
 
 
-### Cycle detection
+### Cycle Detection
 
 * Graph has a cycle <==> Graph has a backward edge
+
+#### Graph Cycle Detection Algorithms
 
 ### Topological Sort
 > One good example of using Topological Sort is 'Job Scheduling'
@@ -952,6 +957,15 @@ https://www.educative.io/edpresso/what-is-topological-sort
 
 https://www.geeksforgeeks.org/topological-sorting-indegree-based-solution/
 
+
+### Dijkstra Algorithm
+
+### Bell Fordman Algorithm
+
+### Kruskal's Minimum Spanning Tree (MST)
+
+### Prim's Minumum Spanning Tree (MST)
+
 ## Dynamic Programming (DP)
 
 Most of the DP problems can be solved by trying out these methods! (More optimize# BFS
@@ -968,6 +982,133 @@ For this, please check this link for a good example of solving DP!
 
 ---
 
+
+# Additional Algorithms in General
+
+## Array related
+
+### 1. Finding duplicates in an array
+
+>Given an array of n elements which contains elements from 0 to n-1, with any of these numbers appearing any number of times. Find these repeating numbers in O(n) and using only constant memory space.
+For example, let n be 7 and array be {1, 2, 3, 1, 3, 6, 6}, the answer should be 1, 3 and 6.
+
+#### Approach 1
+```python
+traverse the list for i= 0 to n-1 elements
+{
+  check for sign of A[abs(A[i])] ;
+  if positive then
+     make it negative by   A[abs(A[i])]=-A[abs(A[i])];
+  else  // i.e., A[abs(A[i])] is negative
+     this   element (ith element of list) is a repetition
+}
+```
+
+* Problem of approach 1: If there are same duplicates element value more than two, It prints the repeated number more than once.
+
+#### Approach 2
+
+* The basic idea is to use a HashMap to solve the problem. But there is a catch, the numbers in the array are from 0 to n-1, and the input array has length n. So, the input array can be used as a HashMap. While traversing the array, if an element a is encountered then increase the value of a%n‘th element by n. The frequency can be retrieved by dividing the a%n‘th element by n.
+
+
+
+```python
+def printRepeating(arr, n): 
+      
+    # First check all the 
+        # values that are 
+    # present in an array 
+        # then go to that 
+    # values as indexes 
+        # and increment by 
+    # the size of array 
+    for i in range(0, n): 
+        index = arr[i] % n 
+        arr[index] += n 
+  
+    # Now check which value 
+        # exists more 
+    # than once by dividing 
+        # with the size 
+    # of array 
+    for i in range(0,n): 
+        if (arr[i]/n) > 1: 
+            print (i , end = " ")
+  
+# Driver's code 
+arr = [1, 6, 3, 1, 3, 6, 6] 
+arr_size = len(arr) 
+  
+print ("The repeating elements are:") 
+  
+printRepeating( arr, arr_size) 
+
+```
+* This approach works because all elements are in the range from 0 to n-1 and arr[i]/n would be greater than 1 only if a value “i” has appeared more than once.
+
+* Problem of Approach 2 --> although each repeated item is printed only once, the order in which their repetition occurs is not maintained
+
+#### Approach 3
+
+* To print elements in order in which they are repeating, the second approach is modified. To mark the presence of an element size of the array, n is added to the index position arr[i] corresponding to array element arr[i]. Before adding n, check if value at index arr[i] is greater than or equal to n or not. If it is greater than or equal to, then this means that element arr[i] is repeating. To avoid printing repeating element multiple times, check if it is the first repetition of arr[i] or not. It is first repetition if value at index position arr[i] is less than 2*n. This is because, if element arr[i] has occurred only once before then n is added to index arr[i] only once and thus value at index arr[i] is less than 2*n. Add n to index arr[i] so that value becomes greater than or equal to 2*n and it will prevent further printing of current repeating element. Also if value at index arr[i] is less than n then it is first occurrence (not repetition) of element arr[i]. So to mark this add n to element at index arr[i].
+
+
+
+```python
+
+# Function to find repeating elements 
+def printDuplicates(arr, n): 
+  
+    # Flag variable used to 
+    # represent whether repeating 
+    # element is found or not. 
+    fl = 0; 
+  
+    for i in range (0, n):  
+  
+        # Check if current element is 
+        # repeating or not. If it is 
+        # repeating then value will 
+        # be greater than or equal to n. 
+        if (arr[arr[i] % n] >= n):  
+  
+            # Check if it is first 
+            # repetition or not. If it is 
+            # first repetition then value 
+            # at index arr[i] is less than 
+            # 2*n. Print arr[i] if it is 
+            # first repetition. 
+            if (arr[arr[i] % n] < 2 * n):  
+                print(arr[i] % n, end = " ") 
+                fl = 1; 
+  
+        # Add n to index arr[i] to mark 
+        # presence of arr[i] or to 
+        # mark repetition of arr[i]. 
+        arr[arr[i] % n] += n; 
+  
+    # If flag variable is not set 
+    # then no repeating element is 
+    # found. So print -1. 
+    if (fl == 0): 
+        print("-1") 
+  
+# Driver Function 
+arr = [ 1, 6, 3, 1, 3, 6, 6 ]; 
+arr_size = len(arr); 
+printDuplicates(arr, arr_size); 
+```
+
+* All of these 1~3 approaches takes O(n) for Time complexity and O(1) for Space complexity.
+
+Reference
+
+https://www.geeksforgeeks.org/find-duplicates-in-on-time-and-constant-extra-space/
+
+https://www.geeksforgeeks.org/duplicates-array-using-o1-extra-space-set-2/
+
+
+https://www.geeksforgeeks.org/duplicates-in-an-array-in-on-time-and-by-using-o1-extra-space-set-3/?ref=rp
 
 
 # Coding Problems Practice
