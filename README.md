@@ -636,6 +636,35 @@ A complete binary tree is a binary tree in which every level, except possibly th
 
 #### Pre Order
 
+#### BFS vs DFS
+BFS
+
+* If solution is not far from the root of the free
+
+* If the tree is deep and solutions are rare (DFS will take too long)
+
+* Often used for shortest path from the starting vertex to a given vertex
+
+DFS
+
+* If tree is too wide (BFS might need too much memory)
+
+* Solutions are frequent but located deep in the tree
+
+* Often used in simulations of games (Chess, Tic-tac-toe etc...)
+
+* Used when you want to exhaust all possibilities, and check which one is the best/count the number of all possible ways.
+
+For Both
+* when you just want to check connectedness between two nodes on a given graph. (Or more generally, whether you could reach a given state to another.)
+
+
+Reference
+
+https://stackoverflow.com/questions/3332947/when-is-it-practical-to-use-depth-first-search-dfs-vs-breadth-first-search-bf
+
+https://www.quora.com/When-should-we-use-BFS-instead-of-DFS-and-vice-versa
+
 ---
 
 ### BST(Binary Search Tree)
@@ -667,7 +696,7 @@ Iterative
 
 ---
 
-### Heaps
+### Binary Heaps
 
 #### Building heaps
 
@@ -757,7 +786,7 @@ def heapSort(arr):
         heapify(arr, i, 0) 
 ```
 
-#### Why do we use Array over Tree for Heaps?
+#### Why do we use Array representation over Tree representation for Heaps?
 ~~~
 The tree uses more time and memory. The complexities are the same, but the constant factors are different.
 
@@ -768,9 +797,56 @@ In addition, there's no guarantee that the nodes of the tree will be together in
 
 
 #### Priority Queue and the Binary Heap
-When using priority queue, if we use binary heap, it is much faster than the using the normal array(or other datastructure) cause it only takes O(n) to add. However, Like sorting, it takes O(nlogn). 
+When using priority queue, if we use binary heap, it is much faster than using the normal array or LinkedList cause it only takes O(n) to add. However, Like sorting, it takes O(nlogn).
+ 
+##### Priority queue
+
+* Implementations
+
+    1. Array implementation
+
+    2. LinkedList implementation
+        * peek(): O(1) 
+        * enqueue(): O(n)
+        * dequeue(): O(1)
+
+    3. Binary Heap implementation
+        * peek(): O(1) 
+        * enqueue(): O(LogN)
+        * dequeue(): O(LogN)
+
+    4. BST implementation
+        * peek(): O(1) 
+        * enqueue(): O(LogN)
+        * dequeue(): O(LogN)    
+        
+*  Binary Heap VS BST which one's better for pq?
+
+    * Since Binary Heap is implemented using arrays, there is always better locality of reference and operations are more cache friendly.
+
+    * Binary Heap doesn’t require extra space for pointers.
+
+    * Although operations are of same time complexity, constants in Binary Search Tree are higher
+
+    * Binary Heap is easier to implement.
+
+    * There are variations of Binary Heap like Fibonacci Heap that can support insert and decrease-key in Θ(1) time
+
+* Still, BST could be better sometimes
+
+    * Searching an element in self-balancing BST is O(Logn) which is O(n) in Binary Heap.
+
+    * We can print all elements of BST in sorted order in O(n) time, but Binary Heap requires O(nLogn) time.
+
+    * `Floor and ceil` can be found in O(Logn) time.
+
+    * K’th largest/smallest element be found in O(Logn) time by augmenting tree with an additional field.
 
 
+
+Reference 
+
+https://www.geeksforgeeks.org/why-is-binary-heap-preferred-over-bst-for-priority-queue/
 
 ###### Resources
 Basics about Heaps: https://medium.com/basecs/learning-to-love-heaps-cef2b273a238
@@ -795,9 +871,90 @@ About Priority Queue: https://www.geeksforgeeks.org/priority-queue-set-1-introdu
 Priorty Queue and Binary Heap: https://runestone.academy/runestone/books/published/pythonds/Trees/PriorityQueueswithBinaryHeaps.html
 
 
+### Fibonacci Heap
+* Time Complexity: 
+
+Extract min: O(LogN)
+Decreasing key: O(1) --> Amortized
+
 ## Graphs
 
-When relating graphs, BFS is usually good for finding shortest path (fastest path). 
+### Degrees in Graphs
+
+1. Degree
+    * The degree of a vertex of a graph is the number of edges that are incident to the vertex,
+
+    * In multigraph,loops are counted twice
+
+2. Indegree (in DAG)
+    * Indegree of vertex V is the number of edges which are coming into the vertex V.
+
+3. Outdegree (in DAG)
+    * Outdegree of vertex V is the number of edges which are going out from the vertex V.
+
+### Graph and its representations
+
+1. Edge lists
+   ```
+   [ [0,1], [0,6], [0,8], [1,4], [1,6], [1,9], [2,4], [2,6], [3,4], [3,5],
+   [3,8], [4,5], [4,9], [7,8], [7,9] ]
+   ```
+
+    * To represent an edge, we just have an array of two vertex numbers, or an array of objects containing the vertex numbers of the vertices that the edges are incident on
+
+    * For weights, add either a third element to the array or more information to the object.
+
+    * Simple but needs linear search for checking whether the graph contains a particular edge
+
+2. Adjacency matrices
+    ```
+    [ [0, 1, 0, 0, 0, 0, 1, 0, 1, 0],
+    [1, 0, 0, 0, 1, 0, 1, 0, 0, 1],
+    [0, 0, 0, 0, 1, 0, 1, 0, 0, 0],
+    [0, 0, 0, 0, 1, 1, 0, 0, 1, 0],
+    [0, 1, 1, 1, 0, 1, 0, 0, 0, 1],
+    [0, 0, 0, 1, 1, 0, 0, 0, 0, 0],
+    [1, 1, 1, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
+    [1, 0, 0, 1, 0, 0, 0, 1, 0, 0],
+    [0, 1, 0, 0, 1, 0, 0, 1, 0, 0] ]
+    ```
+
+    * For a graph with |V|∣V∣vertical bar, V, vertical bar vertices, an adjacency matrix is a |V| \times |V|∣V∣×∣V∣vertical bar, V, vertical bar, times, vertical bar, V, vertical bar matrix of 0s and 1s, where the entry in row iii and column jjj is 1 if and only if the edge (i,j)(i,j)left parenthesis, i, comma, j, right parenthesis is in the graph
+    
+    * Upside
+
+        1. we can find out whether an edge is present in constant time, by just looking up the corresponding entry in the matrix
+
+    * Downside
+
+        1. Takes V^2 Space even if the graph is sparse
+
+        2. if you want to find out which vertices are adjacent to a given vertex i, you have to look at all ∣V∣ enties in row i even if only a small number of vertices are adjacent to vertex i
+    
+    * For an undirected graph, the adjacency matrix is symmetric.
+
+3. Adjacency lists
+
+    ```
+    [ [1, 6, 8],
+    [0, 4, 6, 9],
+    [4, 6],
+    [4, 5, 8],
+    [1, 2, 3, 5, 9],
+    [3, 4],
+    [0, 1, 2],
+    [8, 9],
+    [0, 3, 7],
+    [1, 4, 7] ]
+    ```
+
+    * Representing a graph with adjacency lists combines adjacency matrices with edge lists
+
+    * Vertex numbers in an adjacency list are not required to appear in any particular order, though it is often convenient to list them in increasing order
+
+Reference
+    https://www.khanacademy.org/computing/computer-science/algorithms/graph-representation/a/representing-graphs
 
 ### BFS
 ### DFS
@@ -957,8 +1114,290 @@ https://www.educative.io/edpresso/what-is-topological-sort
 
 https://www.geeksforgeeks.org/topological-sorting-indegree-based-solution/
 
+### Edge Relaxation
+* What's Edge Relaxation?
+> The edge relaxation is the operation to calculate the reaching cost to the vertex lower. The algorithms for the shortest paths problem solve the problem by repeatedly using the edge relaxation
+
+* Reference
+
+   https://towardsdatascience.com/algorithm-shortest-paths-1d8fa3f50769
 
 ### Dijkstra Algorithm
+When the edge is not weighted(every edge's weight is 1), we should consider using BFS. Otherwise, Use Dijkstra Algorithm. 
+
+* Dijkstra Algorithm is a greedy Algorithm since it reaches out the nearest node first. (The algorithm won't fail even without checking the shortest one first but it will take much more time. --> Then there's no point of using this algorithm so this should be a greedy algorithm)
+
+* Dijkstra can be implement in many ways but the efficient and most common one is implemented with `Priority queue(Min-heap based)` 
+
+* Algorithm 
+    1) Create a Min Heap of size V where V is the number of vertices in the given graph. Every node of min heap contains vertex number and distance value of the vertex.
+
+    2) Initialize Min Heap with source vertex as root (the distance value assigned to source vertex is 0). The distance value assigned to all other vertices is INF (infinite).
+
+    3) While Min Heap is not empty, do following
+
+        …..a) Extract the vertex with **minimum distance value** node from Min Heap. Let the extracted vertex be u.
+        
+        …..b) For every adjacent vertex `v` of `u`, check if `v` is in Min Heap. If v is in Min Heap(Means it hasn't been visited yet) and existing distance value of `v` is more than (`weight` of u-v edge + `distance` value of u), then update the distance value of v.
+
+
+* Implementation(Python)
+
+```python
+# A Python program for Dijkstra's shortest 
+# path algorithm for adjacency 
+# list representation of graph 
+
+from collections import defaultdict 
+import sys 
+
+class Heap(): 
+
+	def __init__(self): 
+		self.array = [] 
+		self.size = 0
+		self.pos = [] 
+
+	def newMinHeapNode(self, v, dist): 
+		minHeapNode = [v, dist] 
+		return minHeapNode 
+
+	# A utility function to swap two nodes 
+	# of min heap. Needed for min heapify 
+	def swapMinHeapNode(self,a, b): 
+		t = self.array[a] 
+		self.array[a] = self.array[b] 
+		self.array[b] = t 
+
+	# A standard function to heapify at given idx 
+	# This function also updates position of nodes 
+	# when they are swapped.Position is needed 
+	# for decreaseKey() 
+	def minHeapify(self, idx): 
+		smallest = idx 
+		left = 2*idx + 1
+		right = 2*idx + 2
+
+		if left < self.size and self.array[left][1] \ 
+								< self.array[smallest][1]: 
+			smallest = left 
+
+		if right < self.size and self.array[right][1]\ 
+								< self.array[smallest][1]: 
+			smallest = right 
+
+		# The nodes to be swapped in min 
+		# heap if idx is not smallest 
+		if smallest != idx: 
+
+			# Swap positions 
+			self.pos[ self.array[smallest][0] ] = idx 
+			self.pos[ self.array[idx][0] ] = smallest 
+
+			# Swap nodes 
+			self.swapMinHeapNode(smallest, idx) 
+
+			self.minHeapify(smallest) 
+
+	# Standard function to extract minimum 
+	# node from heap 
+	def extractMin(self): 
+
+		# Return NULL wif heap is empty 
+		if self.isEmpty() == True: 
+			return
+
+		# Store the root node 
+		root = self.array[0] 
+
+		# Replace root node with last node 
+		lastNode = self.array[self.size - 1] 
+		self.array[0] = lastNode 
+
+		# Update position of last node 
+		self.pos[lastNode[0]] = 0
+		self.pos[root[0]] = self.size - 1
+
+		# Reduce heap size and heapify root 
+		self.size -= 1
+		self.minHeapify(0) 
+
+		return root 
+
+	def isEmpty(self): 
+		return True if self.size == 0 else False
+
+    # Used when updating the existing distance (Edge relaxation)
+	def decreaseKey(self, v, dist): 
+
+		# Get the index of v in heap array 
+
+		i = self.pos[v] 
+
+		# Get the node and update its dist value 
+		self.array[i][1] = dist 
+
+		# Travel up while the complete tree is 
+		# not hepified. This is a O(Logn) loop 
+		while i > 0 and self.array[i][1] < self.array[(i - 1) / 2][1]: 
+
+			# Swap this node with its parent 
+			self.pos[ self.array[i][0] ] = (i-1)/2
+			self.pos[ self.array[(i-1)/2][0] ] = i 
+			self.swapMinHeapNode(i, (i - 1)/2 ) 
+
+			# move to parent index 
+			i = (i - 1) / 2; 
+
+	# A utility function to check if a given 
+	# vertex 'v' is in min heap or not 
+	def isInMinHeap(self, v): 
+
+		if self.pos[v] < self.size: 
+			return True
+		return False
+
+
+def printArr(dist, n): 
+	print "Vertex\tDistance from source"
+	for i in range(n): 
+		print "%d\t\t%d" % (i,dist[i]) 
+
+
+class Graph(): 
+
+	def __init__(self, V): 
+		self.V = V 
+		self.graph = defaultdict(list) 
+
+	# Adds an edge to an undirected graph 
+	def addEdge(self, src, dest, weight): 
+
+		# Add an edge from src to dest. A new node 
+		# is added to the adjacency list of src. The 
+		# node is added at the beginning. The first 
+		# element of the node has the destination 
+		# and the second elements has the weight 
+		newNode = [dest, weight] 
+		self.graph[src].insert(0, newNode) 
+
+		# Since graph is undirected, add an edge 
+		# from dest to src also 
+		newNode = [src, weight] 
+		self.graph[dest].insert(0, newNode) 
+
+	# The main function that calulates distances 
+	# of shortest paths from src to all vertices. 
+	# It is a O(ELogV) function 
+	def dijkstra(self, src): 
+
+		V = self.V # Get the number of vertices in graph 
+		dist = [] # dist values used to pick minimum 
+					# weight edge in cut 
+
+		# minHeap represents set E 
+		minHeap = Heap() 
+
+		# Initialize min heap with all vertices. 
+		# dist value of all vertices 
+		for v in range(V): 
+			dist.append(sys.maxint) 
+			minHeap.array.append( minHeap.newMinHeapNode(v, dist[v]) ) 
+			minHeap.pos.append(v) 
+
+		# Make dist value of src vertex as 0 so 
+		# that it is extracted first 
+		minHeap.pos[src] = src 
+		dist[src] = 0
+		minHeap.decreaseKey(src, dist[src]) 
+
+		# Initially size of min heap is equal to V 
+		minHeap.size = V; 
+
+		# In the following loop, min heap contains all nodes 
+		# whose shortest distance is not yet finalized. 
+		while minHeap.isEmpty() == False: 
+
+			# Extract the vertex with minimum distance value 
+			newHeapNode = minHeap.extractMin() 
+			u = newHeapNode[0] 
+
+			# Traverse through all adjacent vertices of 
+			# u (the extracted vertex) and update their 
+			# distance values 
+			for pCrawl in self.graph[u]: 
+
+				v = pCrawl[0] 
+
+				# If shortest distance to v is not finalized 
+				# yet, and distance to v through u is less 
+				# than its previously calculated distance 
+				if minHeap.isInMinHeap(v) and dist[u] != sys.maxint and \ 
+				pCrawl[1] + dist[u] < dist[v]: 
+						dist[v] = pCrawl[1] + dist[u] 
+
+						# update distance value 
+						# in min heap also 
+						minHeap.decreaseKey(v, dist[v]) 
+
+		printArr(dist,V) 
+
+
+# Driver program to test the above functions 
+graph = Graph(9) 
+graph.addEdge(0, 1, 4) 
+graph.addEdge(0, 7, 8) 
+graph.addEdge(1, 2, 8) 
+graph.addEdge(1, 7, 11) 
+graph.addEdge(2, 3, 7) 
+graph.addEdge(2, 8, 2) 
+graph.addEdge(2, 5, 4) 
+graph.addEdge(3, 4, 9) 
+graph.addEdge(3, 5, 14) 
+graph.addEdge(4, 5, 10) 
+graph.addEdge(5, 6, 2) 
+graph.addEdge(6, 7, 1) 
+graph.addEdge(6, 8, 6) 
+graph.addEdge(7, 8, 7) 
+graph.dijkstra(0) 
+
+# This code is contributed by Divyanshu Mehta 
+
+```
+
+* Time Complexity: O((E + V) * LogV)
+
+* Time Complexity can be reduced to O(E + VLogV) using `Fibonacci Heap` Because Fibonacci Heap takes O(1) for `decrease-key` Operation while `Binary Heap` takes O(LogN) time.
+
+* Calculating Time Complexity
+
+    * Thinking of Time Complexity, at each step, we pop a vertex(Extraction) and do relaxation on adjacent nodes(for every edge). So `V(the number of vertices)` * `Extracting operation` + `E(the number of edges)` * `Relaxation Operation`. 
+
+    1. When using `Array` for keeping unvisited vertices, 
+
+        Extract-min: O(V)  
+        Decrease-key(Relaxation): O(1)
+
+        ==> O(V * V + E * 1) = O(V^2)
+
+    2. Binary Min-Heap (PQ) 
+
+        Extract Min: O(logV) (because of heapifying)  
+        Decreasing Key(Relaxation): O(LogV) (because of heapifying at the end to maintain the heap property)
+
+        ==> O(V * LogV + E * LogV) = O((E + V)logV)
+
+    3. Fibonacci Heap
+
+         ==> O(V * LogV + E * 1) = O(E + VLogV)
+
+
+
+* Reference 
+   
+   https://stackoverflow.com/questions/3818079/why-use-dijkstras-algorithm-if-breadth-first-search-bfs-can-do-the-same-thing
+
+   https://www.geeksforgeeks.org/dijkstras-algorithm-for-adjacency-list-representation-greedy-algo-8/
 
 ### Bell Fordman Algorithm
 
