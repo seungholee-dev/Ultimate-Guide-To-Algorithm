@@ -604,7 +604,8 @@ There are also 3 ways to implement `Queue` on Python.
 * Complete Binary Tree: 
 A complete binary tree is a binary tree in which every level, except possibly the last, is completely filled, and all nodes are as far left as possible.
 
-![](images/completeBinaryTree.jpg)
+![](images/completeBinaryTree.jpg)![](images/completeBinaryTree.jpg)dfs
+
 
 #### Understanding the array-based tree index formula
 
@@ -632,9 +633,82 @@ A complete binary tree is a binary tree in which every level, except possibly th
 >2j' --> When you take a look at the tree, for each node for i~j, i'~j' get 2 for each. So 2j' is correct.
 >
 >Therefore, i' = 2i + 1 (for the left child node)
-#### Post Order
 
-#### Pre Order
+
+#### DFS
+
+##### DFS Traversals
+
+![](images/dfs_traversals.jpg)
+
+* Pre-Order Traversal  
+Parent -> Left -> Right
+
+    ```python
+    # A function to do preorder tree traversal 
+    def printPreorder(root): 
+    
+        if root: 
+    
+            # First print the data of node 
+            print(root.val), 
+    
+            # Then recur on left child 
+            printPreorder(root.left) 
+    
+            # Finally recur on right child 
+            printPreorder(root.right)
+    ```
+
+    * Used when duplicating a binary tree.
+
+    * Used for generating prefix representation
+    (Polish Notation)
+
+* In-Order Traversal  
+Left -> Parent -> Right
+
+    ```python
+    # A function to do inorder tree traversal 
+    def printInorder(root): 
+    
+        if root: 
+    
+            # First recur on left child 
+            printInorder(root.left) 
+    
+            # then print the data of node 
+            print(root.val), 
+    
+            # now recur on right child 
+            printInorder(root.right)
+    ```
+
+    * For BST, `In-Order` Traversal prints items in sorted way (will traverse nodes in non-decreasing order)
+
+* Post-Order Traversal  
+Left -> Right -> Parent
+    ```python
+    # A function to do postorder tree traversal 
+    def printPostorder(root): 
+    
+        if root: 
+    
+            # First recur on left child 
+            printPostorder(root.left) 
+    
+            # the recur on right child 
+            printPostorder(root.right) 
+    
+            # now print the data of node 
+            print(root.val)
+    ```
+
+    * Used for deleting nodes (it's easier to deelte leaf nodes and doing this in post-order)
+
+    * For generating postfix representation 
+Reference
+Photo: https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DWLvU5EQVZqY&psig=AOvVaw2XG_qR2e1xrZ-Bm1wtmVO8&ust=1586093266550000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCOD_qoLwzugCFQAAAAAdAAAAABAD
 
 #### BFS vs DFS
 BFS
@@ -659,11 +733,13 @@ For Both
 * when you just want to check connectedness between two nodes on a given graph. (Or more generally, whether you could reach a given state to another.)
 
 
+
 Reference
 
 https://stackoverflow.com/questions/3332947/when-is-it-practical-to-use-depth-first-search-dfs-vs-breadth-first-search-bf
 
 https://www.quora.com/When-should-we-use-BFS-instead-of-DFS-and-vice-versa
+
 
 ---
 
@@ -1551,6 +1627,46 @@ https://www.geeksforgeeks.org/duplicates-in-an-array-in-on-time-and-by-using-o1-
 
 
 # Coding Problems Practice
+
+**Array**
+
+
+MEDIUM  
+1. Subarray Sum Equals K
+
+
+* Can't use `sliding window` technique because this problem contains negative numbers
+```python
+ # Brute Force: O(n^2)
+def subarraySum(self, nums: List[int], k: int) -> int:
+    counter = 0
+    for i in range(len(nums)):
+        sub_sum = 0
+        for j in range(i, len(nums)):
+            sub_sum += nums[j]
+            if sub_sum == k:
+                counter += 1
+    return counter
+```
+
+```python
+# Using HashMap --> O(n)
+def subarraySum(self, nums: List[int], k: int) -> int:
+    # dict: <key:sum / value: frequency> 
+    # <0: 1> for when subset is [] (no elements) --> Also, when subtracting <0: 1> cases when adding to counter, it means including every element from the beginning upto the related index. e.g. [0, 1, 7], k = 1 --> [0, 1], [1] cases and <0: 1> was subtracted when  [0, 1] case --> So <0: 1> is needed at first!
+    sum_freq_dict = {0: 1}
+    sum_upto_i, counter = 0, 0
+    for i in range(len(nums)): # Linear Time Traversal
+        sum_upto_i += nums[i] # Keep adding from the beginning
+        counter += sum_freq_dict.get(sum_upto_i - k ,0) # if sum_upto_i - k is in the Hashmap, add to counter because it means up until now(current index not included), there were that many cases of being that sum (which means if you subtract from the current sum, it can make subsets that sums up to k)
+        sum_freq_dict[sum_upto_i] = sum_freq_dict.get(sum_upto_i, 0) + 1 # After updating the counter Update the dictionary upto current sum. 
+    return counter
+```
+
+
+
+**Strings**
+
 **Tree**
 
 Easy  
