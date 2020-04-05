@@ -1626,6 +1626,63 @@ https://www.geeksforgeeks.org/duplicates-array-using-o1-extra-space-set-2/
 https://www.geeksforgeeks.org/duplicates-in-an-array-in-on-time-and-by-using-o1-extra-space-set-3/?ref=rp
 
 
+## String related
+
+### 1. Print all the permutations
+
+There are several ways to acheive this.
+
+1. Recursive (Inspired by 'Cracking the Coding Interview' by Gaieel laakman)
+    ```python
+        def print_permutation(current_string, left_overs, original_length):
+            # If it reaches the tree leaves, print it!
+            if len(current_string) == original_length:
+                print(current_string, end=" ")
+                return
+            
+            # If it's not the tree leaves, keep going!
+            for i, next_letter in enumerate(left_overs):
+                print_permutation(current_string + next_letter, left_overs[:i] + left_overs[i+1:], original_length)
+            
+
+        s = "PERMUTATION"
+        print_permutation("", s, len(s))
+    ```
+
+    
+2. Another recursive approach 
+    ```python
+
+        def print_permutation(modified_string, current_index, last_index):
+            if current_index == last_index:
+                print(current_string, end=" ")
+                return
+            
+            for i in range(current_index, last_index + 1):
+                # Swap (Just like actual permutation operations)
+                modified_string[current_index], modified_string[i] = modified_string[i], modified_string[current_index]
+                print_permutation(modified_string, i + 1, last_index)
+            
+            # Since you cannot swap the letters in string (imutable), you have to convert it into a list.
+            s = "PERMUTATION"
+            print_permutation(list(s), 0, len(s) - 1) 
+            
+    ```
+
+3. If you want to make sure only the distinct permutations are 
+printed, then you can use `HashSet`!
+
+    You can edit the `1.` Code like below in the if statement. (Same for `2.` code as well)
+    ```python 
+        if len(current_string) == original_length:
+            if not current_string in printed_set:
+                printed_set.add(current_string)
+                print(current_string, end=" ")
+            return
+    ```
+    
+Time Complexity for both: O(n! * n)???? --> Not sure yet
+
 # Coding Problems Practice
 
 **Array**
