@@ -1652,21 +1652,20 @@ There are several ways to acheive this.
     
 2. Another recursive approach 
     ```python
-
         def print_permutation(modified_string, current_index, last_index):
             if current_index == last_index:
-                print(current_string, end=" ")
-                return
-            
+            print(''.join(modified_string), end=" ")
+            return
+
             for i in range(current_index, last_index + 1):
                 # Swap (Just like actual permutation operations)
                 modified_string[current_index], modified_string[i] = modified_string[i], modified_string[current_index]
-                print_permutation(modified_string, i + 1, last_index)
-            
-            # Since you cannot swap the letters in string (imutable), you have to convert it into a list.
-            s = "PERMUTATION"
-            print_permutation(list(s), 0, len(s) - 1) 
-            
+            print_permutation(modified_string, current_index + 1, last_index)
+
+        # Since you cannot swap the letters in string (imutable), you have to convert it into a list.
+        s = "ABCD"
+
+        print_permutation(list(s), 0, len(s) - 1)
     ```
 
 3. If you want to make sure only the distinct permutations are 
