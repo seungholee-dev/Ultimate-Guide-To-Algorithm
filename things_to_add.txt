@@ -1,0 +1,27 @@
+****GRAPH***
+
+- Detecting Cycle
+- MST (Krusal's spanning tree and others)
+- Disjoint Set union
+- BellMan Ford Algorithm
+
+*****Array*****
+- Sliding Windows
+
+
+****String***
+
+- pattern matching
+
+
+*****Tree*****
+
+- Depth vs height vs Level
+
+- AVL Tree
+
+- Red-Black Tree
+
+- formulas for tree (L = I + 1 (L: leaf nodes, I: internal nodes))
+
+- Trie
