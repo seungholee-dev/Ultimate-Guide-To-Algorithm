@@ -1,3 +1,6 @@
+***General***
+Master Theorem
+
 ****GRAPH***
 
 - Detecting Cycle
@@ -11,12 +14,14 @@
 
 ****String***
 
-- pattern matching
-
 
 *****Tree*****
 
+
+
 - Depth vs height vs Level
+
+- B Tree
 
 - AVL Tree
 
@@ -25,3 +30,21 @@
 - formulas for tree (L = I + 1 (L: leaf nodes, I: internal nodes))
 
 - Trie
+
+******Pattern Matching******
+
+- Naive Pattern matching
+
+- Optimized Naive Pattern matching
+
+- KMP algorithm
+
+- Rabin-Karp Algorithm
+
+- Boyer Moore Algorithm
+
+- Finite Automata
+
+
+
+******Bit Manipulation*****
