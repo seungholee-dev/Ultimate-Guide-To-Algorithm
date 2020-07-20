@@ -609,6 +609,7 @@ A complete binary tree is a binary tree in which every level, except possibly th
 
 #### Understanding the array-based tree index formula
 
+* IF THE ARRAY INDEX IS STARTING FROM INDEX 0
 > 1. left_child_i = parent_i * 2 + 1  
 > 2. right_child_i = parent_i * 2 + 2  
 > 3. parent_i = floor((child_i - 1) / 2) --> rounding down at the end. 
@@ -634,6 +635,11 @@ A complete binary tree is a binary tree in which every level, except possibly th
 >
 >Therefore, i' = 2i + 1 (for the left child node)
 
+
+* IF ARRAY IS STARTING FROM INDEX 1
+> 1. left_child_i = parent_i * 2
+> 2. right_child_i = parent_i * 2 + 1
+> 3. parent_i = floor(child_i / 2) --> rounding down at the end. 
 
 #### DFS
 
@@ -779,11 +785,11 @@ Iterative
 a. Heapify from the lowest-level to the root node.
 ```python
 # Build a maxheap. 
-    for i in range(n, -1, -1): #--> n could be ((n - 1) - 1) // 2 for the optimization cause we already the leaves node don't have any children.
-        heapify(arr, n, i) 
+    for i in range(n, -1, -1): #--> n could be changed to ((n - 1) - 1) // 2 for the optimization cause we already know the leaves node don't have any children.
+        heapify(arr, n, i)
 ```
 
-* Note: Sift-Down is way more efficient than Sift-Up here. Sift-Down takes O(n) and Sift-Up takes O(nlog(n)) for building a heap.
+* Note: Sift-Down is way more efficient than Sift-Up here. Sift-Down takes O(n) and Sift-Up takes O(nlog(n)) for building a heap. (When talking about Sift-Down and Sift-Up, we are talking about how `heapify()` works inside. So to speak, if `heapify(arr, n, i)` calls `heapify(arr, n, child)`, then it's Sift Down and if it calls `heapify(arr, n, parent)`, then it's sift up method)
 
 Time Complexity: O(n) --> Check out the link
 
@@ -799,6 +805,7 @@ b. put the largest one on the top(swap with i node value.)
 # To heapify subtree rooted at index i. 
 # n is size of heap 
 def heapify(arr, n, i): 
+    # largest index is needed for keeping track of where it had the largest value (because we need to heapify that place after)
     largest = i # Initialize largest as root 
     l = 2 * i + 1     # left = 2*i + 1 
     r = 2 * i + 2     # right = 2*i + 2 
@@ -820,7 +827,7 @@ def heapify(arr, n, i):
     if largest != i: 
         arr[i],arr[largest] = arr[largest],arr[i] # swap 
   
-        # Heapify the root. 
+        # Heapify the child --> largest index is the child (only the value has changed) --> We are sifting down now.
         heapify(arr, n, largest) 
 
 ```

@@ -3,6 +3,7 @@ def build_max_heap(arr, n):
     for i in range(last_leaf, -1, -1):
         max_heapify(arr, n, i)
 
+# Sift Down method
 def max_heapify(arr, n, i):
     largest = i
     left_index = 2 * i + 1
@@ -20,32 +21,37 @@ def max_heapify(arr, n, i):
     if largest != i:
         max_heapify(arr, n, largest)
 
+# Sift Up method --> Only for inserting node
+def max_heapify_up(arr, n, i):
+    parent_index = (i - 1) // 2
+    
+    if parent_index >= 0 and arr[parent_index] < arr[i]:
+        arr[parent_index], arr[i] = arr[i], arr[parent_index]
+        max_heapify_up(arr, n, parent_index)
+
+
 def delete_root(arr,n):
-    pass
+    arr[0] = arr[n - 1] # Replace the root with the last node
+    n = n - 1 # Reduction in size
+    max_heapify(arr, n, 0) # Heapify the root again!
 
-def extractRoot(arr, n):
-    root = None
-    if n > 1:
-        root = arr[0]
-        arr[0] = arr[n - 1]
-        max_heapify(arr, n - 1, 0)
-    return root
-
-def insertNode():
-    pass
-        
+def insert_node(arr, n, value):
+    n = n + 1 
+    arr[n - 1] = value
+    max_heapify_up(arr, n, n - 1)
+    
 
 if __name__ == "__main__":
-    arr = [7, 3]
+    arr = [7, 3, 1, 3, 5, 6, 2,7, 8,]
     build_max_heap(arr, len(arr))
     print(arr)
 
-    print("-----extracting root-----")
-    print(extractRoot(arr, len(arr)))
+    print("-----Inserting Node-----")
+    delete_root(arr, len(arr))
     print(arr)
 
-    print(extractRoot(arr, len(arr)))
-    print(arr)
+    # print(extractRoot(arr, len(arr)))
+    # print(arr)
 
 
 
