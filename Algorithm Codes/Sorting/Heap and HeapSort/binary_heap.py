@@ -13,7 +13,6 @@ def max_heapify(arr, n, i):
         arr[i], arr[left_index] = arr[left_index], arr[i]
         largest = left_index
 
-
     if right_index < n and arr[right_index] > arr[i]:
         arr[i], arr[right_index] = arr[right_index], arr[i]
         largest = right_index
@@ -30,14 +29,15 @@ def max_heapify_up(arr, n, i):
         max_heapify_up(arr, n, parent_index)
 
 
-def delete_root(arr,n):
+def delete_root(arr, n):
     arr[0] = arr[n - 1] # Replace the root with the last node
+    del arr[n - 1] # Delete the last Node
     n = n - 1 # Reduction in size
     max_heapify(arr, n, 0) # Heapify the root again!
 
 def insert_node(arr, n, value):
     n = n + 1 
-    arr[n - 1] = value
+    arr += [value] # Insert the new Node
     max_heapify_up(arr, n, n - 1)
     
 
@@ -47,6 +47,15 @@ if __name__ == "__main__":
     print(arr)
 
     print("-----Inserting Node-----")
+    insert_node(arr, len(arr), 10)
+    print(arr)
+
+    insert_node(arr, len(arr), 7)
+    print(arr)
+
+    delete_root(arr, len(arr))
+    print(arr)
+
     delete_root(arr, len(arr))
     print(arr)
 
