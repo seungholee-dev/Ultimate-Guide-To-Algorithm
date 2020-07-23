@@ -3,6 +3,7 @@ def build_max_heap(arr, n):
     for i in range(last_leaf, -1, -1):
         max_heapify(arr, n, i)
 
+# Note: Heapify is used when you have built a heap already and you need to keep the property by changing the subtree. (Just Heapifying a random array once(at the root) does not give you a heap)
 # Sift Down method
 def max_heapify(arr, n, i):
     largest = i
@@ -10,14 +11,13 @@ def max_heapify(arr, n, i):
     right_index = 2 * i + 2
 
     if left_index < n and arr[left_index] > arr[i]:
-        arr[i], arr[left_index] = arr[left_index], arr[i]
         largest = left_index
 
-    if right_index < n and arr[right_index] > arr[i]:
-        arr[i], arr[right_index] = arr[right_index], arr[i]
+    if right_index < n and arr[right_index] > arr[largest]:
         largest = right_index
 
     if largest != i:
+        arr[i], arr[largest] = arr[largest], arr[i]
         max_heapify(arr, n, largest)
 
 # Sift Up method --> Only for inserting node
