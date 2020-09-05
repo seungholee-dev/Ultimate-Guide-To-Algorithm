@@ -1,3 +1,5 @@
+from collections import deque
+
 class TreeNode:
     def __init__(self, value):
         self.left = None
@@ -37,11 +39,7 @@ class TreeNode:
         right = self.get_height(node.right) + 1
         left = self.get_height(node.left) + 1
         return max(right, left)
-            
 
-    # print tree by level
-    def print_tree_level(self):
-        pass
     # Show tree
     def display(self):
         pass
@@ -65,12 +63,63 @@ class TreeNode:
     def clear_tree(self):
         self.root = None
     
+
+# In-order traversal
+def dfs_recursive(node):
+    if node is None:
+        return
+    dfs_recursive(node.left)
+    print(node.val, end=" ")
+    dfs_recursive(node.right)
+
+# In-order traversal
+def dfs_iterative(node):
+    if node is None:
+        return
+    
+    stack = deque([root])
+    while stack:
+        node = stack.pop()
+        if node is None:
+            continue
+        if node.left:
+            stack.append(node.left)
+            continue
+        # The node.left is None
+        else:
+            node = stack.pop()
+            print(node.val)
+            stack.append(node.right)
+        
+        
+
+def bfs_recursive():
+    pass
+
+def bfs_iterative(root):
+    queue = deque([root])
+
+    while queue:
+        node = queue.popleft()
+        print(node.val, end=" ")
+        if node.left:
+            queue.append(node.left)
+        if node.right:
+            queue.append(node.right)
+        
+
 if __name__ == "__main__":
     root = TreeNode(5)
-    root.insert_node(TreeNode(1))
-    root.insert_node(TreeNode(6))
-    root.insert_node(TreeNode(4))
-    root.insert_node(TreeNode(5))
     root.insert_node(TreeNode(3))
+    root.insert_node(TreeNode(1))
+    root.insert_node(TreeNode(4))
+    root.insert_node(TreeNode(7))
+    root.insert_node(TreeNode(6))
+    root.insert_node(TreeNode(8))
 
     root.print_tree()
+
+    dfs_recursive(root)
+    # dfs_iterative(root)
+    print()
+    bfs_iterative(root)
