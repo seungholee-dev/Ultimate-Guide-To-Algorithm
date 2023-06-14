@@ -25,6 +25,7 @@ Here are some examples of Big O Notation:
 
 <br>
 <br>
+
 ### 2. Time Complexity :timer_clock:
 
 Time Complexity is computational complexity that describes **the amount of computer time it takes to run an algorithm**
@@ -70,6 +71,7 @@ The code runtime depends on length of nums. As the nums gets bigger, the run tim
 </div>
 </details>
 <br>
+
 #### Amortized vs Averaged Runtime?
 
 -   Averaged is often used when the case is random(unpredictable).
