@@ -1484,6 +1484,18 @@ graph.dijkstra(0)
 
 ### Bell Fordman Algorithm
 
+- **Single Source to all other nodes**
+- For unweighted graphs, works well. but rather than this, would recommend using normal BFS, DFS
+- Can detect negative cycles and will return a boolean whether negative cycle was detected or not. If there’s negative cycle, then it cannot provide correct shortest path info
+- For unweighted graph, works well. but rather than this, would recommend using normal BFS, DFS
+
+### Floyd Warshall's Algorithm
+- **All source to all other nodes (*all-pairs shortest path algorithm)***
+- Works with negative weights
+- For unweighted graph, rather than this, would recommend using normal BFS, DFS
+- Cannot detect negative cycle
+
+
 ### Kruskal's Minimum Spanning Tree (MST)
 
 ### Prim's Minumum Spanning Tree (MST)
