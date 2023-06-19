@@ -1,4 +1,4 @@
-# :books: The Ultimate Guide To Algorithm
+# :books: Ultimate Guide To Algorithm
 
 All-in-one algorithms guide that you need to know as IT Tech Person.
 Feel free to contribute to this project.
