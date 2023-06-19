@@ -3,6 +3,12 @@
 All-in-one algorithms guide that you need to know as IT Tech Person.
 Feel free to contribute to this project.
 
+### Contributors
+<a href="https://github.com/PricelessCode/Ultimate-Guide-To-Algorithm/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=PricelessCode/Ultimate-Guide-To-Algorithm" />
+</a>
+
+
 <br>
 
 ## Background knowledge
