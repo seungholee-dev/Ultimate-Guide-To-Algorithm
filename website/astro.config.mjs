@@ -69,7 +69,7 @@ export default defineConfig({
                     items: [
                         {
                             label: "Knapsack Problems",
-                            link: "/dp/knapsack.md",
+                            link: "/dp/knapsack",
                         },
                     ],
                 },
