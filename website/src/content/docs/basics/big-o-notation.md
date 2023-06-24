@@ -15,3 +15,4 @@ Here are some examples of Big O Notation:
 -   **O(nlogn)**: Oh wow, The cost increases in proportion to nlogn of the input size `n`
 -   **O(n^2)**: Oh... The cost increases in proportion to n^2 of the input size `n`
 -   **O(n!)**: Omg!! The cost increases in proportion to factorial of the input size `n`!
+
