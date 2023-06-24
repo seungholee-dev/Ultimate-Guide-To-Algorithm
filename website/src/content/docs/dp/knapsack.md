@@ -108,8 +108,6 @@ print(knapSack(W, wt, val, n))  # Outputs: 220
 
 - Do note in the Nested `for` loop, outer loop is about the items to show we are using items only once. Because 0/1 Knapsack problem doesn't allow using more than once for each item.
 
-Here's a 
-
 
 ### 2. Fractional Knapsack Problem
 
