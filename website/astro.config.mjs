@@ -65,13 +65,14 @@ export default defineConfig({
                     ],
                 },
                 {
-                  label: "Dynamic Programming",
-                  items: [
-                    {
-                      label: "Knapsack Problems",
-                      link: "/dynamic-programming/knapsack.md",
-                    }
-                }
+                    label: "Dynamic Programming",
+                    items: [
+                        {
+                            label: "Knapsack Problems",
+                            link: "/dynamic-programming/knapsack.md",
+                        },
+                    ],
+                },
                 // {
                 //     label: "Searching",
                 //     items: [
