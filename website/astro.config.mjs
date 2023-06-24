@@ -56,11 +56,11 @@ export default defineConfig({
                         },
                         {
                             label: "Radix Sort",
-                            link: "/sorting/counting-sort",
+                            link: "/sorting/radix-sort",
                         },
                         {
                             label: "Bucket Sort",
-                            link: "/sorting/counting-sort",
+                            link: "/sorting/bucket-sort",
                         },
                     ],
                 },
