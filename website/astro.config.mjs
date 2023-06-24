@@ -56,11 +56,20 @@ export default defineConfig({
                         },
                         {
                             label: "Radix Sort",
-                            link: "/sorting/counting-sort",
+                            link: "/sorting/radix-sort",
                         },
                         {
                             label: "Bucket Sort",
-                            link: "/sorting/counting-sort",
+                            link: "/sorting/bucket-sort",
+                        },
+                    ],
+                },
+                {
+                    label: "Dynamic Programming",
+                    items: [
+                        {
+                            label: "Knapsack Problems",
+                            link: "/dp/knapsack",
                         },
                     ],
                 },
