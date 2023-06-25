@@ -2,16 +2,15 @@ from Graph import *
 import heapq
 
 class AdjacencyMatrixGraph(Graph):
-    def __init__(self, nodes, edges=None, is_directed=False):
+    def __init__(self, nodes, edges=[], is_directed=False):
         self.n = nodes
         self.matrix = [[0 for j in range(self.n)] for i in range(self.n)]
         self.is_directed = is_directed
 
-        if(edges != None):
-            for ((u, v), w) in edges:
-                self.matrix[u][v] = w
-                if not self.is_directed:
-                    self.matrix[v][u] = w
+        for ((u, v), w) in edges:
+            self.matrix[u][v] = w
+            if not self.is_directed:
+                self.matrix[v][u] = w
     
     def add_edge(self, edge):
         ((u, v), w) = edge
@@ -20,7 +19,7 @@ class AdjacencyMatrixGraph(Graph):
             self.matrix[v][u] = w
     
     def remove_edge(self, edge):
-        (u, v) = edge
+        ((u, v), _ ) = edge
         self.matrix[u][v] = 0
         if not self.is_directed:
             self.matrix[v][u] = w
