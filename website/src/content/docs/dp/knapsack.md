@@ -26,15 +26,17 @@ There are many variations of the knapsack problem:
 1. **0/1 Knapsack Problem**
    Each item can be included in the knapsack or not, making it a binary choice. You aim to maximize the total value of items without exceeding the weight limit of the knapsack.
    <br>
+   <br>
 2. **Fractional Knapsack Problem**
    This problem permits fractions of items to be taken. This means if an item is too heavy to fully fit into the knapsack, a part of it can be included proportionally.
+   <br>
    <br>
 3. **Unbounded Knapsack Problem**
    In this variation, there's no limit on how many times an item can be included in the knapsack, as long as the weight limit isn't exceeded.
    <br>
+   <br>
 
-4. **Bounded Knapsack Problem**
-   Each item in this problem has a limit on how many times it can be included in the knapsack. This is an intermediate of the 0/1 and unbounded problems.
+<br>
 
 While there are many other variants, these should be more than enough to know and solve most of the problems :)
 
@@ -46,11 +48,11 @@ Here's a sample Question:
 
 > Given a list of items with specific weights and values, and a knapsack with a maximum weight capacity, determine the maximum value that can be placed in the knapsack.
 
-| Item | Weight | Value |
-|-------|--------|-------|
-| Item1 | 1 | 60 |
-| Item2 | 2 | 100 |
-| Item3 | 3 | 120 |
+| Item  | Weight | Value |
+| ----- | ------ | ----- |
+| Item1 | 1      | 60    |
+| Item2 | 2      | 100   |
+| Item3 | 3      | 120   |
 
 And say we have a knapsack with a maximum weight capacity of **5**. The question is to find the maximum value we can fit into the knapsack.
 
@@ -70,7 +72,7 @@ Here's the code:
 def knapSack(W, wt, val, n):
     # K[i][j] will store the maximum value that can be achieved with i items and capacity j
     K = [[0 for w in range(W + 1)] for i in range(n + 1)]
- 
+
     # Build the K[][] table in a bottom-up manner
     for i in range(n + 1):
         for w in range(W + 1):
@@ -86,10 +88,10 @@ def knapSack(W, wt, val, n):
                 # If the weight of the current item is more than the current weight capacity, we cannot include the item
                 # So we carry forward the maximum value achieved considering the previous items with the same weight capacity
                 K[i][w] = K[i-1][w]
- 
+
     # K[n][W] holds the maximum value that can be achieved considering all items and the full weight capacity
     return K[n][W]
- 
+
 # Values and weights of the items
 val = [60, 100, 120]
 wt = [1, 2, 3]
@@ -105,9 +107,7 @@ print(knapSack(W, wt, val, n))  # Outputs: 220
 
 ```
 
-
-- Do note in the Nested `for` loop, outer loop is about the items to show we are using items only once. Because 0/1 Knapsack problem doesn't allow using more than once for each item.
-
+-   Do note in the Nested `for` loop, outer loop is about the items to show we are using items only once. Because 0/1 Knapsack problem doesn't allow using more than once for each item.
 
 ### 2. Fractional Knapsack Problem
 
@@ -117,6 +117,16 @@ print(knapSack(W, wt, val, n))  # Outputs: 220
 
 > Given a knapsack of a specific capacity and lists of weights and values where you can choose an item any number of times, find out the maximum value that the knapsack can hold.
 
-### 4. Bounded Knapsack Problem
+### Coding Problems
 
-> Given a list of items with specific weights, values, and quantity limits, determine the maximum value that can be placed in the knapsack of a certain capacity.
+| **Problem**                                                                                                                                                                                               | **Topic**           | **Platform**  |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------- | ------------- |
+| Target Sum                                                                                                                                                                                                | 0/1 Knapsack        | Leetcode      |
+| Partition Equal Subset Sum                                                                                                                                                                                | 0/1 Knapsack        | Leetcode      |
+| Ones and Zeroes                                                                                                                                                                                           | 0/1 Knapsack        | Leetcode      |
+| Last Stone Weight II                                                                                                                                                                                      | 0/1 Knapsack        | Leetcode      |
+| <a href="https://practice.geeksforgeeks.org/problems/fractional-knapsack-1587115620/1?utm_source=geeksforgeeks&utm_medium=article_practice_tab&utm_campaign=article_practice_tab">Fractional Knapsack</a> | Fractional Knapsack | GeeksForGeeks |
+| Maximum Units on a Truck                                                                                                                                                                                  | Fractional Knapsack | Leetcode      |
+| Coin Change                                                                                                                                                                                               | Unbounded Knapsack  | Leetcode      |
+| Coin Change II                                                                                                                                                                                            | Unbounded Knapsack  | Leetcode      |
+| Minimum Cost For tickets                                                                                                                                                                                  | Unbounded Knapsack  | Leetcode      |
