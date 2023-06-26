@@ -38,6 +38,7 @@ There are many variations of the knapsack problem:
 
 <br>
 
+
 While there are many other variants, these should be more than enough to know and solve most of the problems :)
 
 <br>
@@ -48,11 +49,12 @@ Here's a sample Question:
 
 > Given a list of items with specific weights and values, and a knapsack with a maximum weight capacity, determine the maximum value that can be placed in the knapsack.
 
-| Item  | Weight | Value |
-| ----- | ------ | ----- |
-| Item1 | 1      | 60    |
-| Item2 | 2      | 100   |
-| Item3 | 3      | 120   |
+
+| Item | Weight | Value |
+|-------|--------|-------|
+| Item1 | 1 | 60 |
+| Item2 | 2 | 100 |
+| Item3 | 3 | 120 |
 
 And say we have a knapsack with a maximum weight capacity of **5**. The question is to find the maximum value we can fit into the knapsack.
 
@@ -89,9 +91,10 @@ def knapSack(W, wt, val, n):
                 # So we carry forward the maximum value achieved considering the previous items with the same weight capacity
                 K[i][w] = K[i-1][w]
 
+ 
     # K[n][W] holds the maximum value that can be achieved considering all items and the full weight capacity
     return K[n][W]
-
+ 
 # Values and weights of the items
 val = [60, 100, 120]
 wt = [1, 2, 3]
@@ -107,7 +110,9 @@ print(knapSack(W, wt, val, n))  # Outputs: 220
 
 ```
 
--   Do note in the Nested `for` loop, outer loop is about the items to show we are using items only once. Because 0/1 Knapsack problem doesn't allow using more than once for each item.
+- Do note in the Nested `for` loop, outer loop is about the items to show we are using items only once. Because 0/1 Knapsack problem doesn't allow using more than once for each item.
+
+
 
 ### 2. Fractional Knapsack Problem
 
@@ -130,3 +135,4 @@ print(knapSack(W, wt, val, n))  # Outputs: 220
 | Coin Change                                                                                                                                                                                               | Unbounded Knapsack  | Leetcode      |
 | Coin Change II                                                                                                                                                                                            | Unbounded Knapsack  | Leetcode      |
 | Minimum Cost For tickets                                                                                                                                                                                  | Unbounded Knapsack  | Leetcode      |
+
