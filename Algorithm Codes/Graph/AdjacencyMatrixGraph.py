@@ -2,16 +2,15 @@ from Graph import *
 import heapq
 
 class AdjacencyMatrixGraph(Graph):
-    def __init__(self, nodes, edges=None, is_directed=False):
+    def __init__(self, nodes, edges=[], is_directed=False):
         self.n = nodes
         self.matrix = [[0 for j in range(self.n)] for i in range(self.n)]
         self.is_directed = is_directed
 
-        if(edges != None):
-            for ((u, v), w) in edges:
-                self.matrix[u][v] = w
-                if not self.is_directed:
-                    self.matrix[v][u] = w
+        for ((u, v), w) in edges:
+            self.matrix[u][v] = w
+            if not self.is_directed:
+                self.matrix[v][u] = w
     
     def add_edge(self, edge):
         ((u, v), w) = edge
@@ -20,7 +19,7 @@ class AdjacencyMatrixGraph(Graph):
             self.matrix[v][u] = w
     
     def remove_edge(self, edge):
-        (u, v) = edge
+        ((u, v), _ ) = edge
         self.matrix[u][v] = 0
         if not self.is_directed:
             self.matrix[v][u] = w
@@ -69,6 +68,26 @@ class AdjacencyMatrixGraph(Graph):
         
         return (dist, prev)
 
+    def floyd_warshall(self):
+        dist = [[float('inf') for i in range(self.n)] for j in range(self.n)]
+
+        for i in range(self.n):
+            dist[i][i] = 0
+            for j in range(self.n):
+                if(self.matrix[i][j] != 0):
+                    dist[i][j] = self.matrix[i][j]
+            
+        for k in range(self.n):
+            for u in range(self.n):
+                for v in range(self.n):
+                    if(dist[u][v] > dist[u][k] + dist[k][v]):
+                        dist[u][v] = dist[u][k] + dist[k][v]
+        
+        for i in range(self.n):
+            if(dist[i][i] < 0):
+                return None
+            
+        return dist
 
 nodes = 6
 edges = [((0,1), 3), ((0,2), 8), ((1,2), 5), ((1,3), 6), ((2,3), 3), ((2,4), 2), ((3,4), 1), ((3,5), 9), ((4,5), 3)]
@@ -82,8 +101,12 @@ graph4 = AdjacencyMatrixGraph(4, [((0, 1), 3), ((0, 2), 2), ((1, 2), -2), ((1, 3
 graph5 = AdjacencyMatrixGraph(3, [((0, 1), 1), ((1, 2), -1), ((2, 0), -2)], True)
 
 print(graph3.bellman_ford(0))
+print(graph3.floyd_warshall()[0])
 print(graph4.bellman_ford(0))
+print(graph4.floyd_warshall()[0])
 print(graph5.bellman_ford(0))
+print(graph5.floyd_warshall())
+
 
 
     
