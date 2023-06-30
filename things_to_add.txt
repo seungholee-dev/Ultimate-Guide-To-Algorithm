@@ -48,3 +48,7 @@ Master Theorem
 
 
 ******Bit Manipulation*****
+
+
+
+For solving algorithms

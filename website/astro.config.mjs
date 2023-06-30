@@ -118,15 +118,40 @@ export default defineConfig({
                 //         },
                 //     ],
                 // },
-                // {
-                //     label: "Two Pointer",
-                //     items: [
-                //         {
-                //             label: "Bubble Sort",
-                //             link: "/sorting/bubble-sort",
-                //         },
-                //     ],
-                // },
+                {
+                    label: "Two Pointer",
+                    items: [
+                        {
+                            //https://leetcode.com/discuss/study-guide/1905453/master-in-two-pointer
+                            //https://tarunjain07.medium.com/two-pointers-notes-4d1400357437
+                            label: "Collision Pointers",
+                            link: "/two-pointer/two-sum",
+                        },
+                        {
+                            label: "Forward Pointers",
+                            link: "/two-pointer/same-start",
+                        },
+                        {
+                            label: "Parallel Pointers",
+                            link: "/two-pointer/intersection",
+                        },
+                        {
+                            label: "Fast and Slow Pointer",
+                        },
+                        {
+                            label: "Kadane's Algorithm",
+                            link: "/two-pointer/kadane",
+                        },
+                        {
+                            label: "Sliding Window",
+                            link: "/sliding-window/bubble-sort",
+                        },
+                        {
+                            label: "Prefix Sums",
+                            link: "/prefix-sums/bubble-sort",
+                        },
+                    ],
+                },
                 // {
                 //     label: "Tree",
                 //     items: [
