@@ -71,6 +71,10 @@ export default defineConfig({
                             label: "Knapsack Problems",
                             link: "/dp/knapsack",
                         },
+                        {
+                            label: "Kadane's Algorithm",
+                            link: "/dp/kadanes-algorithm",
+                        },
                     ],
                 },
                 // {
@@ -143,11 +147,6 @@ export default defineConfig({
                             label: "Fast and Slow Pointer",
                             link: "/two-pointer/fast-slow-pointers",
                         },
-                        {
-                            label: "Kadane's Algorithm",
-                            link: "/two-pointer/kadanes-algorithm",
-                        },
-                       
                     ],
                 },
                 // {
