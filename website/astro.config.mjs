@@ -122,34 +122,32 @@ export default defineConfig({
                     label: "Two Pointer",
                     items: [
                         {
+                            label: "Overview",
+                            link: "/two-pointer/overview",
+                        },
+                        {
                             //https://leetcode.com/discuss/study-guide/1905453/master-in-two-pointer
                             //https://tarunjain07.medium.com/two-pointers-notes-4d1400357437
                             label: "Collision Pointers",
-                            link: "/two-pointer/two-sum",
+                            link: "/two-pointer/collision-pointers",
                         },
                         {
                             label: "Forward Pointers",
-                            link: "/two-pointer/same-start",
+                            link: "/two-pointer/forward-pointers",
                         },
                         {
                             label: "Parallel Pointers",
-                            link: "/two-pointer/intersection",
+                            link: "/two-pointer/parallel-pointers",
                         },
                         {
                             label: "Fast and Slow Pointer",
+                            link: "/two-pointer/fast-slow-pointers",
                         },
                         {
                             label: "Kadane's Algorithm",
-                            link: "/two-pointer/kadane",
+                            link: "/two-pointer/kadanes-algorithm",
                         },
-                        {
-                            label: "Sliding Window",
-                            link: "/sliding-window/bubble-sort",
-                        },
-                        {
-                            label: "Prefix Sums",
-                            link: "/prefix-sums/bubble-sort",
-                        },
+                       
                     ],
                 },
                 // {
