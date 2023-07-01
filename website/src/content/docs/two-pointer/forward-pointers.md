@@ -1,43 +1,27 @@
 ---
-title: Sliding Window 
-description: Learning Sliding Window
+title: Forward Pointers
+description: Learning Two Pointers
 ---
 
-
-2. Forward Pointers
 These pointers start at the same position and move to one direction. This approach is typically used in problems involving subarrays or subsequences where you need to keep track of a contiguous block of elements. For example, the problem of finding the longest substring with no repeating characters can be solved using this approach.
 
-```python
-def smallest_subarray_with_given_sum(s, arr):
-    window_sum = 0
-    min_length = float('inf')
-    window_start = 0
+Forward Pointers technique is also as known as Sliding Window technique where each left pointer and right pointer proceeds in the same direction and the two pointers form `windows` if this makes sense haha
 
-    for window_end in range(0, len(arr)):
-        window_sum += arr[window_end]  # add the next element
+There are Two Sub-categories for Forward Pointers.
 
-        # shrink the window as much as possible while maintaining the constraint
-        while window_sum >= s:
-            min_length = min(min_length, window_end - window_start + 1)
-            window_sum -= arr[window_start]
-            window_start += 1
+1. Fixed Size  
+   This means the `window` size is fixed.
 
-    if min_length == float('inf'):
-        return 0
-
-    return min_length
-
-```
+2. Flexible Size  
+   This means the `window` size is changing according to the conditions.
 
 
-
-
-
-1. Fixed Size
-
-
-2. Flexible Size
-
-
-Leetcode
-Longest Repeating Character Replacement
+| **Problem**                                                               | **Topic**     | **Platform** |
+| ------------------------------------------------------------------------- | ------------- | ------------ |
+| Contains Duplicate II                                                     | Fixed Size    | Leetcode     |
+| Number of Sub Arrays of Size K and Avg Greater than or Equal to Threshold | Fixed Size    | Leetcode     |
+| Maximum Average Subarray I                                                | Fixed Size    | Leetcode     |
+| Substrings of Size Three with Distinct Characters                         | Fixed Size    | Leetcode     |
+| Minimum Size Subarray Sum                                                 | Flexible Size | Leetcode     |
+| Longest Substring Without Repeating Characters                            | Flexible Size | Leetcode     |
+| Longest Repeating Character Replacement                                   | Flexible Size | Leetcode     |
