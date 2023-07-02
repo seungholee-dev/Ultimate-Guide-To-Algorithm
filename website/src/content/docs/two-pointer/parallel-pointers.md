@@ -1,6 +1,6 @@
 ---
-title: Collision Pointers 
-description: Learning Sliding Window
+title: Parallel Pointers 
+description: Learning Two Pointers
 ---
 3. Parallel Pointers
 Parallel pointers typically refer to a situation where you have two pointers each traversing their own separate but related arrays or lists. This is often used when you need to merge two sorted arrays or compare elements between the arrays. Here's a quick Python example showing how you might use parallel pointers to merge two sorted arrays:

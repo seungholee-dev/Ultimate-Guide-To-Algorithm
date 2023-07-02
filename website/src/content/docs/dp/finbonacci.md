@@ -8,4 +8,4 @@ Staircase
 Number factors
 Minimum jumps to reach the end
 Minimum jumps with fee
-House thief
+House thiewf

@@ -15,7 +15,6 @@ There are Two Sub-categories for Forward Pointers.
 2. Flexible Size  
    This means the `window` size is changing according to the conditions.
 
-
 | **Problem**                                                               | **Topic**     | **Platform** |
 | ------------------------------------------------------------------------- | ------------- | ------------ |
 | Contains Duplicate II                                                     | Fixed Size    | Leetcode     |
@@ -25,3 +24,4 @@ There are Two Sub-categories for Forward Pointers.
 | Minimum Size Subarray Sum                                                 | Flexible Size | Leetcode     |
 | Longest Substring Without Repeating Characters                            | Flexible Size | Leetcode     |
 | Longest Repeating Character Replacement                                   | Flexible Size | Leetcode     |
+| Number Of Substrings Containing All Three Characters                      | Flexible Size | Leetcode     |
