@@ -150,6 +150,7 @@ export default defineConfig({
                         {
                             label: "Two Pointers with Binary Search",
                             link: "/two-pointer/pointers-with-binary-search",
+
                         },
                     ],
                 },
