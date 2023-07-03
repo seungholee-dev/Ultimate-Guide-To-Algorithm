@@ -23,5 +23,7 @@ There are Two Sub-categories for Forward Pointers.
 | Substrings of Size Three with Distinct Characters                         | Fixed Size    | Leetcode     |
 | Minimum Size Subarray Sum                                                 | Flexible Size | Leetcode     |
 | Longest Substring Without Repeating Characters                            | Flexible Size | Leetcode     |
+| Longest Substring with At Most Two Distince Characters                    | Flexible Size | Leetcode     |
+| Remove Nth Node From End of List                                          | Flexible Size | Leetcode     |
 | Longest Repeating Character Replacement                                   | Flexible Size | Leetcode     |
 | Number Of Substrings Containing All Three Characters                      | Flexible Size | Leetcode     |

@@ -147,6 +147,10 @@ export default defineConfig({
                             label: "Fast and Slow Pointer",
                             link: "/two-pointer/fast-slow-pointers",
                         },
+                        {
+                            label: "Two Pointers with Binary Search",
+                            link: "/two-pointer/fast-slow-pointers",
+                        },
                     ],
                 },
                 // {
