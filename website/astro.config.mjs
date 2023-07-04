@@ -180,6 +180,36 @@ export default defineConfig({
                 //         },
                 //     ],
                 // },
+                {
+                    label: "Graph",
+                    items: [
+                        {
+                            label: "Overview",
+                            link: "/graph/overview",
+                        },
+                        {
+                            label: "Graph Representaion",
+                            link: "/graph/representation",
+                        },
+                        {
+                            label: "BFS & DFS",
+                            link: "/graph/bfs-dfs",
+                        },
+                        {
+                            label: "Minimum Spanning Tree",
+                            link: "/graph/mst",
+                        },
+                        {
+                            label: "Shortest Path",
+                            link: "/graph/shortest-path",
+                        },
+
+                        {
+                            label: "Topological Sort",
+                            link: "/graph/topological-sort",
+                        },
+                    ],
+                },
             ],
         }),
     ],
