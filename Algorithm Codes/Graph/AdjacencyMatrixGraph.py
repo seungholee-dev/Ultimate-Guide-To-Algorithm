@@ -63,7 +63,7 @@ class AdjacencyMatrixGraph(Graph):
                     dist[v] = w + dist[u]
                     prev[v] = u
         
-        if(prev[start] != None):
+        if(prev[start] is not None):
             return None
         
         return (dist, prev)

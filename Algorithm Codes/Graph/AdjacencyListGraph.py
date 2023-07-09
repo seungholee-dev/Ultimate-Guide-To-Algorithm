@@ -12,7 +12,7 @@ class LinkedList:
         self.head = None
 
     def add(self, node, weight):
-        if(self.head == None):
+        if(self.head is None):
             self.head = ListNode(node, weight)
         else:
             new_head = ListNode(node, weight)
@@ -26,7 +26,7 @@ class LinkedList:
         prev = dummy
         curr = self.head
 
-        while(curr != None):
+        while(curr is not None):
             if(curr.node == node):
                 prev.next = curr.next
                 break
@@ -38,7 +38,7 @@ class LinkedList:
     def to_list(self):
         res = []
         curr = self.head
-        while(curr != None):
+        while(curr is not None):
             res.append((curr.node, curr.weight))
             curr = curr.next
         return res
@@ -100,7 +100,7 @@ class AdjacencyListGraph(Graph):
             visited[u] = True
 
             curr = self.adj[u].head
-            while(curr != None):
+            while(curr is not None):
                 new_path_len = dist[u] + curr.weight
                 if(new_path_len < dist[curr.node]):
                     dist[curr.node] = new_path_len
@@ -118,13 +118,13 @@ class AdjacencyListGraph(Graph):
         for i in range(self.n-1):
             for u in range(self.n):
                 edge = self.adj[u].head
-                while(edge != None):
+                while(edge is not None):
                     if(edge.weight + dist[u] < dist[edge.node]):
                         dist[edge.node] = edge.weight + dist[u]
                         prev[edge.node] = u
                     edge = edge.next
         
-        if(prev[start] != None):
+        if(prev[start] is not None):
             return None
         
         return (dist, prev)
@@ -135,7 +135,7 @@ class AdjacencyListGraph(Graph):
         for i in range(self.n):
             dist[i][i] = 0
             edge = self.adj[i].head
-            while(edge != None):
+            while(edge is not None):
                 dist[i][edge.node] = edge.weight
                 edge = edge.next
         
