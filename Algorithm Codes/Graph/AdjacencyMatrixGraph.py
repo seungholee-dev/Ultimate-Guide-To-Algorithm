@@ -33,13 +33,13 @@ class AdjacencyMatrixGraph(Graph):
         heap = []
         heapq.heappush(heap, (0, start))
 
-        while(heap):
+        while heap:
             (path_len, u) = heapq.heappop(heap)
             visited[u] = True
             for i in range(self.n):
-                if(self.matrix[u][i] != 0 and not(visited[i])):
+                if self.matrix[u][i] != 0 and not(visited[i]):
                     new_path_len = dist[u] + self.matrix[u][i]
-                    if(new_path_len < dist[i]):
+                    if new_path_len < dist[i]:
                         dist[i] = new_path_len
                         prev[i] = u
                         heapq.heappush(heap, (dist[i], i))
@@ -54,16 +54,16 @@ class AdjacencyMatrixGraph(Graph):
         edges = []
         for i in range(self.n):
             for j in range(self.n):
-                if(self.matrix[i][j] != 0):
+                if self.matrix[i][j]:
                     edges.append(((i,j), self.matrix[i][j]))
 
         for i in range(self.n-1):
             for ((u,v), w) in edges:
-                if(w + dist[u] < dist[v]):
+                if w + dist[u] < dist[v]:
                     dist[v] = w + dist[u]
                     prev[v] = u
         
-        if(prev[start] is not None):
+        if prev[start] is not None:
             return None
         
         return (dist, prev)
@@ -74,17 +74,17 @@ class AdjacencyMatrixGraph(Graph):
         for i in range(self.n):
             dist[i][i] = 0
             for j in range(self.n):
-                if(self.matrix[i][j] != 0):
+                if self.matrix[i][j] != 0:
                     dist[i][j] = self.matrix[i][j]
             
         for k in range(self.n):
             for u in range(self.n):
                 for v in range(self.n):
-                    if(dist[u][v] > dist[u][k] + dist[k][v]):
+                    if dist[u][v] > dist[u][k] + dist[k][v]:
                         dist[u][v] = dist[u][k] + dist[k][v]
         
         for i in range(self.n):
-            if(dist[i][i] < 0):
+            if dist[i][i] < 0:
                 return None
             
         return dist
