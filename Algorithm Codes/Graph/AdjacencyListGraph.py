@@ -160,7 +160,7 @@ class AdjacencyListGraph(Graph):
         heap = []
 
         curr = self.adj[0].head
-        while(curr is not None):
+        while curr is not None:
             heapq.heappush(heap, (curr.weight, (0, curr.node)))
             curr = curr.next
         
