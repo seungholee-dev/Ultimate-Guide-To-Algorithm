@@ -172,7 +172,8 @@ class AdjacencyListGraph(Graph):
 
 
             curr = self.adj[v].head
-            while(curr is not None):
+            while curr is not None:
+
                 if not visited[curr.node]:
                     heapq.heappush(heap, (curr.weight, (v, curr.node)))
                 curr = curr.next
