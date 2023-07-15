@@ -165,7 +165,7 @@ class AdjacencyListGraph(Graph):
             curr = curr.next
         
         while(nodes_left > 0):
-            (_, (u, v)) = heapq.heappop(heap)
+            _, (u, v) = heapq.heappop(heap)
             edges.append((u, v))
             visited[v] = True
             nodes_left -= 1
