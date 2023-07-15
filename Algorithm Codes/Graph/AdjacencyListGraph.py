@@ -150,6 +150,34 @@ class AdjacencyListGraph(Graph):
                 return None
         
         return dist
+    
+    def prims(self):
+        nodes_left = self.n
+        visited = [False for i in range(self.n)]
+        visited[0] = True
+        edges = []
+
+        heap = []
+
+        curr = self.adj[0].head
+        while(curr is not None):
+            heapq.heappush(heap, (curr.weight, (0, curr.node)))
+            curr = curr.next
+        
+        while(nodes_left > 0):
+            (_, (u, v)) = heapq.heappop(heap)
+            edges.append((u, v))
+            visited[v] = True
+            nodes_left = nodes_left - 1
+
+            curr = self.adj[v].head
+            while(curr is not None):
+                if not visited[curr.node]:
+                    heapq.heappush(heap, (curr.weight, (v, curr.node)))
+                curr = curr.next
+        
+        return edges
+        
 
 nodes = 6
 edges = [((0,1), 3), ((0,2), 8), ((1,2), 5), ((1,3), 6), ((2,3), 3), ((2,4), 2), ((3,4), 1), ((3,5), 9), ((4,5), 3)]
@@ -167,4 +195,6 @@ print(graph4.bellman_ford(0))
 print(graph4.floyd_warshall()[0])
 print(graph5.bellman_ford(0))
 print(graph5.floyd_warshall())
+
+print(graph.prims())
         
