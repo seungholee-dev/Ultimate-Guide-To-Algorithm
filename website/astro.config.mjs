@@ -28,6 +28,19 @@ export default defineConfig({
                     ],
                 },
                 {
+                    label: "Searching",
+                    items: [
+                        {
+                            label: "Linear Search",
+                            link: "/searching/linear-search",
+                        },
+                        {
+                            label: "Binary Search",
+                            link: "/searching/binary-search",
+                        },
+                    ],
+                },
+                {
                     label: "Sorting",
                     items: [
                         {
@@ -65,6 +78,15 @@ export default defineConfig({
                     ],
                 },
                 {
+                    label: "HashMap",
+                    items: [],
+                },
+                {
+                    label: "Stack & Queue",
+                    items: [],
+                },
+
+                {
                     label: "Dynamic Programming",
                     items: [
                         {
@@ -77,51 +99,20 @@ export default defineConfig({
                         },
                     ],
                 },
-                // {
-                //     label: "Searching",
-                //     items: [
-                //         {
-                //             label: "Bubble Sort",
-                //             link: "/sorting/bubble-sort",
-                //         },
-                //     ],
-                // },
-                // {
-                //     label: "Hash Map",
-                //     items: [
-                //         {
-                //             label: "Bubble Sort",
-                //             link: "/sorting/bubble-sort",
-                //         },
-                //     ],
-                // },
-                // {
-                //     label: "Hash Set",
-                //     items: [
-                //         {
-                //             label: "Bubble Sort",
-                //             link: "/sorting/bubble-sort",
-                //         },
-                //     ],
-                // },
-                // {
-                //     label: "Searching",
-                //     items: [
-                //         {
-                //             label: "Bubble Sort",
-                //             link: "/sorting/bubble-sort",
-                //         },
-                //     ],
-                // },
-                // {
-                //     label: "Linked List",
-                //     items: [
-                //         {
-                //             label: "Bubble Sort",
-                //             link: "/sorting/bubble-sort",
-                //         },
-                //     ],
-                // },
+                {
+                    label: "Backtracking",
+                    items: [
+                        {
+                            label: "General",
+                            link: "/backtracking/general",
+                        },
+                    ],
+                },
+                {
+                    label: "Greedy",
+                    items: [],
+                },
+
                 {
                     label: "Two Pointer",
                     items: [
@@ -150,37 +141,25 @@ export default defineConfig({
                         {
                             label: "Two Pointers with Binary Search",
                             link: "/two-pointer/pointers-with-binary-search",
-
                         },
                     ],
                 },
-                // {
-                //     label: "Tree",
-                //     items: [
-                //         {
-                //             label: "Bubble Sort",
-                //             link: "/sorting/bubble-sort",
-                //         },
-                //     ],
-                // },
-                // {
-                //     label: "Graph",
-                //     items: [
-                //         {
-                //             label: "Bubble Sort",
-                //             link: "/sorting/bubble-sort",
-                //         },
-                //     ],
-                // },
-                // {
-                //     label: "Disjoint Set",
-                //     items: [
-                //         {
-                //             label: "Bubble Sort",
-                //             link: "/sorting/bubble-sort",
-                //         },
-                //     ],
-                // },
+                {
+                    label: "String",
+                    items: [],
+                },
+                {
+                    label: "ArrayList",
+                    items: [],
+                },
+                {
+                    label: "Tree",
+                    items: [],
+                },
+                {
+                    label: "Disjoint Set",
+                    items: [],
+                },
                 {
                     label: "Graph",
                     items: [
@@ -210,6 +189,10 @@ export default defineConfig({
                             link: "/graph/topological-sort",
                         },
                     ],
+                },
+                {
+                    label: "Math",
+                    items: [],
                 },
             ],
         }),
